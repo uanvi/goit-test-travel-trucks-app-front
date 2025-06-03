@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_BASE_URL } from "../config/apiConfig";
+import axios from 'axios';
+import { API_BASE_URL } from '../config/apiConfig';
 
 export const getAllCampers = async () => {
   const response = await axios.get(API_BASE_URL);
