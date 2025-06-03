@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import campersReducer from './campersSlice';
+import campersReducer from './campers/campersSlice';
 
 export const store = configureStore({
   reducer: {
@@ -7,6 +7,5 @@ export const store = configureStore({
   },
 });
 
-//hooks types
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
