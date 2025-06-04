@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import { TEXTS } from '../../config/textsConfig';
+import './BookingForm.css';
 
 interface BookingFormProps {
   camperName: string;
@@ -44,12 +44,12 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
   };
 
   return (
-    <div>
-      <h3>Book your campervan now</h3>
-      <p>Stay connected! We are always ready to help you.</p>
+    <div className="booking-form">
+      <h3 className="booking-form__title">Book your campervan now</h3>
+      <p className="booking-form__subtitle">Stay connected! We are always ready to help you.</p>
 
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="booking-form__form">
+        <div className="booking-form__field">
           <input
             type="text"
             name="name"
@@ -57,10 +57,11 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
             value={formData.name}
             onChange={handleChange}
             required
+            className="booking-form__input"
           />
         </div>
 
-        <div>
+        <div className="booking-form__field">
           <input
             type="email"
             name="email"
@@ -68,10 +69,11 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
             value={formData.email}
             onChange={handleChange}
             required
+            className="booking-form__input"
           />
         </div>
 
-        <div>
+        <div className="booking-form__field">
           <input
             type="date"
             name="bookingDate"
@@ -79,20 +81,24 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
             value={formData.bookingDate}
             onChange={handleChange}
             required
+            className="booking-form__input"
           />
         </div>
 
-        <div>
+        <div className="booking-form__field">
           <textarea
             name="comment"
             placeholder="Comment"
             value={formData.comment}
             onChange={handleChange}
             rows={4}
+            className="booking-form__textarea"
           />
         </div>
 
-        <button type="submit">Send</button>
+        <button type="submit" className="booking-form__submit">
+          Send
+        </button>
       </form>
     </div>
   );

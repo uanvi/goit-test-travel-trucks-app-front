@@ -1,0 +1,94 @@
+/* src/components/CamperFeatures/CamperFeatures.css */
+
+.camper-features {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-medium);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  width: 631px;
+  height: 588px;
+  padding: 20px;
+  /* Прибираємо overflow-y: auto */
+}
+
+/* Features List */
+.camper-features__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-shrink: 0;
+}
+
+.camper-features__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-bg-badge);
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  height: 48px;
+  min-width: max-content;
+}
+
+.camper-features__feature-icon {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.camper-features__feature-label {
+  text-transform: capitalize;
+}
+
+/* Vehicle Details Section */
+.camper-features__vehicle-details {
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border-light);
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .camper-features {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    padding: var(--space-xl);
+  }
+
+  .camper-features__list {
+    gap: var(--space-xs);
+  }
+
+  .camper-features__feature {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+    height: 40px;
+    background-color: rgba(242, 244, 247, 1);
+  }
+
+  .camper-features__feature-icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .camper-features {
+    min-height: 350px;
+    padding: var(--space-lg);
+  }
+
+  .camper-features__feature {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-xs);
+    gap: var(--space-xs);
+    height: 36px;
+    background-color: rgba(242, 244, 247, 1);
+  }
+}

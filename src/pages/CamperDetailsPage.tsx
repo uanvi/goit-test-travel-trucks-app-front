@@ -9,6 +9,7 @@ import CamperFeatures from '../components/CamperFeatures/CamperFeatures';
 import CamperReviews from '../components/CamperReviews/CamperReviews';
 import CamperGallery from '../components/CamperGallery/CamperGallery';
 import BookingForm from '../components/BookingForm/BookingForm';
+import './CamperDetailsPage.css';
 
 const CamperDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,53 +51,93 @@ const CamperDetailsPage: React.FC = () => {
 
   // Обробка стану завантаження
   if (loading) {
-    return <p>{TEXTS.loading.initial}</p>;
+    return (
+      <div className="camper-details">
+        <p>{TEXTS.loading.initial}</p>
+      </div>
+    );
   }
 
   // Обробка помилок
   if (error) {
-    return <ErrorBlock message={error} onRetry={handleRetry} />;
+    return (
+      <div className="camper-details">
+        <ErrorBlock message={error} onRetry={handleRetry} />
+      </div>
+    );
   }
 
   // Обробка відсутності даних
   if (!camper) {
-    return <ErrorBlock message={TEXTS.errors.notFound} onRetry={handleRetry} />;
+    return (
+      <div className="camper-details">
+        <ErrorBlock message={TEXTS.errors.notFound} onRetry={handleRetry} />
+      </div>
+    );
   }
 
   return (
-    <section>
-      <h1>{camper.name}</h1>
-      <p>
-        ⭐ {camper.rating} ({camper.reviews.length}) | 📍 {camper.location}
-      </p>
-      <h2>€{camper.price.toFixed(2)}</h2>
+    <section className="camper-details">
+      {/* Заголовок */}
+      <div className="camper-details__header">
+        <h1 className="camper-details__title">{camper.name}</h1>
+
+        <div className="camper-details__meta">
+          <div className="camper-details__rating">
+            <span className="camper-details__star">⭐</span>
+            <span>{camper.rating}</span>
+            <span className="camper-details__reviews">({camper.reviews.length} Reviews)</span>
+          </div>
+          <div className="camper-details__location">
+            <span>📍</span>
+            <span>{camper.location}</span>
+          </div>
+        </div>
+
+        <div className="camper-details__price">€{camper.price.toFixed(2)}</div>
+      </div>
 
       {/* Gallery */}
-      <CamperGallery camper={camper} />
+      <div className="camper-details__gallery">
+        <CamperGallery camper={camper} />
+      </div>
 
       {/* Description */}
-      <p>{camper.description}</p>
+      <p className="camper-details__description">{camper.description}</p>
 
       {/* Main Content Layout */}
-      <div>
-        {/* Left Column - Tabs Content */}
-        <div>
-          {/* Tab Navigation */}
-          <div>
-            <button onClick={() => setActiveTab('features')}>{TEXTS.camper.tabs.features}</button>
+      <div className="camper-details__content">
+        {/* Tab Navigation - через обидві колонки */}
+        <div className="camper-details__tabs-nav">
+          <button
+            className={`camper-details__tab ${
+              activeTab === 'features' ? 'camper-details__tab--active' : ''
+            }`}
+            onClick={() => setActiveTab('features')}
+          >
+            {TEXTS.camper.tabs.features}
+          </button>
 
-            <button onClick={() => setActiveTab('reviews')}>{TEXTS.camper.tabs.reviews}</button>
-          </div>
+          <button
+            className={`camper-details__tab ${
+              activeTab === 'reviews' ? 'camper-details__tab--active' : ''
+            }`}
+            onClick={() => setActiveTab('reviews')}
+          >
+            {TEXTS.camper.tabs.reviews}
+          </button>
+        </div>
 
-          {/* Tab Content */}
-          <div>
+        {/* Left Column - Tab Content */}
+        <div className="camper-details__tabs-section">
+          <div className="camper-details__tab-content">
             {activeTab === 'features' && <CamperFeatures camper={camper} />}
             {activeTab === 'reviews' && <CamperReviews camper={camper} />}
           </div>
         </div>
 
         {/* Right Column - Booking Form */}
-        <div>
+        <div className="camper-details__booking-section">
           <BookingForm camperName={camper.name} />
         </div>
       </div>
