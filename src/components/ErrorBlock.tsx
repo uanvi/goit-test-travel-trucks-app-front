@@ -1,5 +1,6 @@
 import React from 'react';
 import { TEXTS } from '../config/textsConfig';
+import './ErrorBlock.css';
 
 interface ErrorBlockProps {
   message?: string;
@@ -23,16 +24,15 @@ const ErrorBlock: React.FC<ErrorBlockProps> = ({ message = TEXTS.errors.default,
       return TEXTS.errors.server;
     }
 
-    //return TEXTS.errors.default;
     return errorMessage;
   };
 
   return (
-    <div style={{ color: 'crimson', padding: '1rem', textAlign: 'center' }}>
-      <h2>😔 {TEXTS.errors.title}</h2>
-      <p>{getHumanMessage(message)}</p>
+    <div className="error-block">
+      <h2 className="error-block__title">😔 {TEXTS.errors.title}</h2>
+      <p className="error-block__message">{getHumanMessage(message)}</p>
       {onRetry && (
-        <button onClick={onRetry} style={{ marginTop: '1rem' }}>
+        <button onClick={onRetry} className="error-block__retry-button">
           {TEXTS.buttons.retry}
         </button>
       )}

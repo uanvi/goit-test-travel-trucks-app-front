@@ -1,15 +1,18 @@
+/* src/components/Header/Header.css */
+
 .header {
-  background-color: #f7f7f7;
+  background-color: var(--color-bg-secondary);
   border-bottom: none;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-card);
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,20 +21,21 @@
 }
 
 .header-logo {
-  font-size: 20px;
-  font-weight: 600;
-  color: #101828;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   text-decoration: none;
   letter-spacing: -0.02em;
+  transition: color 0.2s ease;
 }
 
 .header-logo:hover {
-  color: #101828;
+  color: var(--color-text-primary);
 }
 
 .header-nav {
   display: flex;
-  gap: 60px;
+  gap: var(--space-6xl);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -39,39 +43,49 @@
 
 .nav-link {
   text-decoration: none;
-  color: #101828;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
   transition: color 0.2s ease;
   position: relative;
 }
 
 .nav-link:hover {
-  color: #d84343;
+  color: var(--color-accent-red);
 }
 
 .nav-link--active {
-  color: #d84343;
-  font-weight: 500;
+  color: var(--color-accent-red);
+  font-weight: var(--font-weight-medium);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .header-container {
-    padding: 0 20px;
+    padding: 0 var(--space-xl);
     height: 60px;
   }
 
   .header-logo {
-    font-size: 18px;
+    font-size: var(--font-size-lg);
   }
 
   .header-nav {
-    gap: 32px;
+    gap: var(--space-3xl);
   }
 
   .nav-link {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 var(--space-lg);
+  }
+
+  .header-nav {
+    gap: var(--space-2xl);
   }
 }

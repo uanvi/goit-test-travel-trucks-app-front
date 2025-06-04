@@ -1,0 +1,49 @@
+/* src/components/ErrorBlock.css */
+
+.error-block {
+  color: var(--color-accent-red);
+  padding: var(--space-2xl);
+  text-align: center;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-small);
+  margin: var(--space-2xl) 0;
+}
+
+.error-block__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-md);
+  color: var(--color-accent-red);
+}
+
+.error-block__message {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.error-block__retry-button {
+  background-color: var(--color-button-primary);
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-2xl);
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family-primary);
+}
+
+.error-block__retry-button:hover {
+  background-color: var(--color-button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+.error-block__retry-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(228, 72, 72, 0.2);
+}
