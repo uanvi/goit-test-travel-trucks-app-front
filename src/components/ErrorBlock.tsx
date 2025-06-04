@@ -23,7 +23,8 @@ const ErrorBlock: React.FC<ErrorBlockProps> = ({ message = TEXTS.errors.default,
       return TEXTS.errors.server;
     }
 
-    return TEXTS.errors.default;
+    //return TEXTS.errors.default;
+    return errorMessage;
   };
 
   return (
