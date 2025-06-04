@@ -19,12 +19,18 @@ body {
   flex-direction: column;
 }
 
+/* HomePage - ширина 1440px */
 .main-content {
   flex: 1;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
   width: 100%;
+}
+
+/* Catalog та Details - ширина 1312px */
+.main-content.catalog {
+  max-width: 1312px;
 }
 
 /* Responsive design */
