@@ -1,0 +1,115 @@
+.home-page {
+  margin: -20px; /* Компенсуємо padding з main-content */
+  margin-top: 0; /* Не компенсуємо top padding для header spacing */
+}
+
+.hero {
+  width: 1440px; /* Фіксована ширина макету */
+  height: 696px; /* 768 - 72 (header) = 696px */
+  margin: 0 auto; /* Центруємо hero */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('/images/hero-camper.webp'), url('/images/hero-camper.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.hero-content {
+  width: 100%;
+  padding: 0 20px;
+  color: white;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  max-width: 500px;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.33;
+  margin-bottom: 40px;
+  max-width: 460px;
+  opacity: 0.95;
+}
+
+.hero-button {
+  display: inline-block;
+  background-color: #d84343;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 60px;
+  border-radius: 200px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-button:hover {
+  background-color: #c13838;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(216, 67, 67, 0.3);
+}
+
+.hero-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(216, 67, 67, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero {
+    height: 432px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      url('/images/hero-camper-mobile.webp'), url('/images/hero-camper-mobile.jpg');
+  }
+
+  .hero-content {
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+
+  .hero-button {
+    padding: 14px 48px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 380px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-button {
+    padding: 12px 40px;
+  }
+}

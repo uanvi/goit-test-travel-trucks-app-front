@@ -1,5 +1,3 @@
-const HomePage: React.FC = () => {
-  return <h1>Home Page</h1>;
-};
+import HomePage from '../components/HomePage/HomePage';
 
 export default HomePage;
