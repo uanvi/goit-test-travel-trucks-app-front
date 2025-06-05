@@ -1,5 +1,3 @@
-/* src/pages/CatalogPage.css */
-
 .catalog-page {
   display: grid;
   grid-template-columns: 360px 1fr;
@@ -10,7 +8,6 @@
   width: 100%;
 }
 
-/* Sidebar (поки placeholder) */
 .catalog-page__sidebar {
   position: sticky;
   top: 120px;
@@ -39,7 +36,6 @@
   line-height: var(--line-height-normal);
 }
 
-/* Основний контент */
 .catalog-page__content {
   min-height: 80vh;
 }
@@ -53,7 +49,6 @@
   letter-spacing: -0.01em;
 }
 
-/* Сітка кемперів */
 .catalog-page__grid {
   display: flex;
   flex-direction: column;
@@ -61,7 +56,6 @@
   margin-bottom: var(--space-4xl);
 }
 
-/* Стани завантаження */
 .catalog-page__loading,
 .catalog-page__loading-more {
   display: flex;
@@ -81,12 +75,10 @@
   padding: var(--space-2xl) var(--space-xl);
 }
 
-/* Помилки */
 .catalog-page__error {
   margin: var(--space-4xl) 0;
 }
 
-/* Кнопка Load More */
 .catalog-page__load-more {
   display: flex;
   justify-content: center;
@@ -131,7 +123,6 @@
   box-shadow: none;
 }
 
-/* Повідомлення про завершення */
 .catalog-page__all-loaded {
   text-align: center;
   padding: var(--space-4xl) var(--space-xl);
@@ -146,7 +137,6 @@
   line-height: var(--line-height-normal);
 }
 
-/* Порожній стан */
 .catalog-page__empty {
   display: flex;
   justify-content: center;
@@ -160,7 +150,38 @@
   margin: 0;
 }
 
-/* Responsive дизайн */
+.catalog-page__header {
+  margin-bottom: var(--space-2xl);
+}
+
+.catalog-page__filter-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.catalog-page__results-count {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.catalog-page__active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.catalog-page__filter-tag {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-medium);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
 @media (max-width: 1024px) {
   .catalog-page {
     grid-template-columns: 280px 1fr;

@@ -1,5 +1,3 @@
-/* src/pages/CamperDetailsPage.css */
-
 .camper-details {
   max-width: 1312px;
   margin: 0 auto;
@@ -59,12 +57,10 @@
   margin-bottom: var(--space-2xl);
 }
 
-/* Галерея */
 .camper-details__gallery {
   margin-bottom: var(--space-2xl);
 }
 
-/* Опис */
 .camper-details__description {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
@@ -72,7 +68,6 @@
   margin-bottom: var(--space-4xl);
 }
 
-/* Основний контент - двоколонковий layout */
 .camper-details__content {
   display: grid;
   grid-template-columns: 631px 641px;
@@ -82,12 +77,11 @@
   align-items: start;
 }
 
-/* Табова навігація - тепер через обидві колонки */
 .camper-details__tabs-nav {
   display: flex;
   gap: var(--space-4xl);
   border-bottom: 1px solid var(--color-border-light);
-  grid-column: 1 / 3; /* Займає обидві колонки */
+  grid-column: 1 / 3;
   grid-row: 1;
 }
 
@@ -124,7 +118,6 @@
   border-radius: 2px 2px 0 0;
 }
 
-/* Ліва колонка - тільки контент табів */
 .camper-details__tabs-section {
   display: flex;
   flex-direction: column;
@@ -132,20 +125,17 @@
   grid-row: 2;
 }
 
-/* Контент табів */
 .camper-details__tab-content {
   width: 631px;
   height: 588px;
 }
 
-/* Права колонка - форма бронювання */
 .camper-details__booking-section {
   grid-column: 2;
   grid-row: 2;
   align-self: start;
 }
 
-/* Responsive design */
 @media (max-width: 1024px) {
   .camper-details {
     padding: var(--space-3xl) var(--space-xl);
