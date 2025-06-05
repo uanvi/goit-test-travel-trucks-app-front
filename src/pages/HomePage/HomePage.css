@@ -1,14 +1,12 @@
-/* src/components/HomePage/HomePage.css */
-
 .home-page {
-  margin: calc(-1 * var(--space-xl)); /* Компенсуємо padding з main-content */
-  margin-top: 0; /* Не компенсуємо top padding для header spacing */
+  margin: calc(-1 * var(--space-xl));
+  margin-top: 0;
 }
 
 .hero {
-  width: 1440px; /* Фіксована ширина макету */
-  height: 696px; /* 768 - 72 (header) = 696px */
-  margin: 0 auto; /* Центруємо hero */
+  width: 1440px;
+  height: 696px;
+  margin: 0 auto;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url('/images/hero-camper.webp'), url('/images/hero-camper.jpg');
   background-size: cover;
@@ -70,7 +68,6 @@
   box-shadow: 0 4px 15px rgba(228, 72, 72, 0.3);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .hero {
     width: 100%;

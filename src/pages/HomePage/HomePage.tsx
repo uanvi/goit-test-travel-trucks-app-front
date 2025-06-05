@@ -1,6 +1,6 @@
-// src/components/HomePage/HomePage.tsx
 import React from 'react';
-import MainButton from '../MainButton/MainButton';
+import MainButton from '../../components/MainButton/MainButton';
+import { TEXTS } from '../../config/textsConfig';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -8,10 +8,10 @@ const HomePage: React.FC = () => {
     <div className="home-page">
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title">Campers of your dreams</h1>
-          <p className="hero-subtitle">You can find everything you want in our catalog</p>
+          <h1 className="hero-title">{TEXTS.homePage.hero.title}</h1>
+          <p className="hero-subtitle">{TEXTS.homePage.hero.subtitle}</p>
           <MainButton href="/catalog" size="wide">
-            View Now
+            {TEXTS.buttons.viewNow}
           </MainButton>
         </div>
       </section>
