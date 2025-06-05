@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCampers, applyFilters, loadMoreWithFilters } from '../../redux/campers/campersSlice';
-import { setAllFilters } from '../../redux/filters/filtersSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 import ErrorBlock from '../../components/ErrorBlock';
 import CamperCard from '../../components/CamperCard/CamperCard';
@@ -28,8 +27,6 @@ const CatalogPage: React.FC = () => {
     activeFilters,
   } = useSelector((state: RootState) => state.campers);
 
-  const filters = useSelector((state: RootState) => state.filters);
-
   useEffect(() => {
     if (storeInitialized) return;
     dispatch(fetchCampers({ page: 1, reset: true }));
@@ -40,7 +37,6 @@ const CatalogPage: React.FC = () => {
   }, [favorites]);
 
   const handleFilterChange = (newFilters: FilterParams) => {
-    dispatch(setAllFilters(newFilters));
     dispatch(applyFilters(newFilters));
   };
 

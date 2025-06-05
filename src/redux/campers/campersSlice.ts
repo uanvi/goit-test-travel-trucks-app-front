@@ -1,8 +1,7 @@
-// src/redux/campers/campersSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getCampersByPage } from '../../api/campersApi';
 import { CAMPERS_PER_PAGE } from '../../config/apiConfig';
-import { FilterState } from '../filters/filtersSlice';
+import { FilterParams } from '../../components/FilterSidebar/FilterSidebar';
 
 export interface Camper {
   id: string;
@@ -48,8 +47,8 @@ interface CampersState {
   currentPage: number;
   total: number;
   hasInitialized: boolean;
-  activeFilters: FilterState | null; // Зберігаємо поточні фільтри
-  isFiltered: boolean; // Чи застосовані фільтри
+  activeFilters: FilterParams | null;
+  isFiltered: boolean;
 }
 
 const initialState: CampersState = {
@@ -63,10 +62,9 @@ const initialState: CampersState = {
   isFiltered: false,
 };
 
-// Оновлений thunk з підтримкою фільтрів
 export const fetchCampers = createAsyncThunk<
   CampersResponse,
-  { page: number; reset?: boolean; filters?: FilterState }
+  { page: number; reset?: boolean; filters?: FilterParams }
 >('campers/fetchByPage', async ({ page, reset = false, filters }, thunkAPI) => {
   try {
     const data = await getCampersByPage(page, CAMPERS_PER_PAGE, filters);
@@ -79,8 +77,7 @@ export const fetchCampers = createAsyncThunk<
   }
 });
 
-// Новий thunk для застосування фільтрів
-export const applyFilters = createAsyncThunk<CampersResponse, FilterState>(
+export const applyFilters = createAsyncThunk<CampersResponse, FilterParams>(
   'campers/applyFilters',
   async (filters, thunkAPI) => {
     try {
@@ -136,7 +133,6 @@ const campersSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      // Звичайне завантаження кемперів
       .addCase(fetchCampers.pending, state => {
         state.loading = true;
         state.error = null;
@@ -145,24 +141,21 @@ const campersSlice = createSlice({
         fetchCampers.fulfilled,
         (
           state,
-          action: PayloadAction<CampersResponse & { reset?: boolean; filters?: FilterState }>,
+          action: PayloadAction<CampersResponse & { reset?: boolean; filters?: FilterParams }>,
         ) => {
           state.loading = false;
           state.hasInitialized = true;
 
-          // Якщо це скидання або перша сторінка, замінюємо всі items
           if (action.payload.reset || state.currentPage === 0) {
             state.items = action.payload.items;
             state.currentPage = 1;
           } else {
-            // Інакше додаємо до існуючих
             state.items.push(...action.payload.items);
             state.currentPage += 1;
           }
 
           state.total = action.payload.total;
 
-          // Оновлюємо інформацію про фільтри
           if (action.payload.filters) {
             state.activeFilters = action.payload.filters;
             state.isFiltered = true;
@@ -175,14 +168,13 @@ const campersSlice = createSlice({
         state.hasInitialized = true;
       })
 
-      // Застосування фільтрів
       .addCase(applyFilters.pending, state => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
         applyFilters.fulfilled,
-        (state, action: PayloadAction<CampersResponse & { filters?: FilterState }>) => {
+        (state, action: PayloadAction<CampersResponse & { filters?: FilterParams }>) => {
           state.loading = false;
           state.items = action.payload.items;
           state.currentPage = 1;
@@ -201,7 +193,6 @@ const campersSlice = createSlice({
         state.error = action.payload as string;
       })
 
-      // Завантаження більше з фільтрами
       .addCase(loadMoreWithFilters.pending, state => {
         state.loading = true;
         state.error = null;

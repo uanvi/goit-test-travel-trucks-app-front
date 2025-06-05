@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../config/apiConfig';
-import { FilterState } from '../redux/filters/filtersSlice';
+import { FilterParams } from '../components/FilterSidebar/FilterSidebar';
+import { getFilterableFeatures } from '../utils/featuresUtils';
 
 export interface CampersApiParams {
   page: number;
@@ -29,7 +30,7 @@ export const getCamperById = async (id: string) => {
   return response.data;
 };
 
-export const getCampersByPage = async (page: number, limit: number, filters?: FilterState) => {
+export const getCampersByPage = async (page: number, limit: number, filters?: FilterParams) => {
   const params: CampersApiParams = {
     page,
     limit,
@@ -73,49 +74,52 @@ export const getUniqueLocations = async (): Promise<string[]> => {
   }
 };
 
+// ✅ Рефакторена функція - використовує центральний конфіг
 export const getFilterStats = async () => {
   try {
     const response = await axios.get(API_BASE_URL);
     const campers = response.data.items;
 
+    // ✅ Отримуємо equipment features з централізованого конфігу
+    const filterableFeatures = getFilterableFeatures();
+
+    // ✅ Динамічно створюємо byEquipment на основі конфігу
+    const byEquipment: Record<string, any> = {};
+    filterableFeatures.forEach(feature => {
+      if (feature.filterKey === 'transmission') {
+        byEquipment.transmission = { automatic: 0, manual: 0 };
+      } else if (feature.filterKey) {
+        byEquipment[feature.filterKey] = 0;
+      }
+    });
+
     const stats = {
       total: campers.length,
       byForm: {} as Record<string, number>,
       byLocation: {} as Record<string, number>,
-      byEquipment: {
-        AC: 0,
-        transmission: { automatic: 0, manual: 0 },
-        kitchen: 0,
-        TV: 0,
-        bathroom: 0,
-        refrigerator: 0,
-        microwave: 0,
-        gas: 0,
-        water: 0,
-        radio: 0,
-      },
+      byEquipment,
     };
 
     campers.forEach((camper: any) => {
+      // Form stats
       if (camper.form) {
         stats.byForm[camper.form] = (stats.byForm[camper.form] || 0) + 1;
       }
 
+      // Location stats
       if (camper.location) {
         stats.byLocation[camper.location] = (stats.byLocation[camper.location] || 0) + 1;
       }
 
-      if (camper.AC) stats.byEquipment.AC++;
-      if (camper.transmission === 'automatic') stats.byEquipment.transmission.automatic++;
-      if (camper.transmission === 'manual') stats.byEquipment.transmission.manual++;
-      if (camper.kitchen) stats.byEquipment.kitchen++;
-      if (camper.TV) stats.byEquipment.TV++;
-      if (camper.bathroom) stats.byEquipment.bathroom++;
-      if (camper.refrigerator) stats.byEquipment.refrigerator++;
-      if (camper.microwave) stats.byEquipment.microwave++;
-      if (camper.gas) stats.byEquipment.gas++;
-      if (camper.water) stats.byEquipment.water++;
-      if (camper.radio) stats.byEquipment.radio++;
+      // ✅ Equipment stats - динамічно на основі конфігу
+      filterableFeatures.forEach(feature => {
+        if (feature.filterKey === 'transmission') {
+          if (camper.transmission === 'automatic') stats.byEquipment.transmission.automatic++;
+          if (camper.transmission === 'manual') stats.byEquipment.transmission.manual++;
+        } else if (feature.filterKey && camper[feature.key]) {
+          stats.byEquipment[feature.filterKey]++;
+        }
+      });
     });
 
     return stats;

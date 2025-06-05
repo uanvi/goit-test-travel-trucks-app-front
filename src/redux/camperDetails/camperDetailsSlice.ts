@@ -16,7 +16,6 @@ const initialState: CamperDetailsState = {
   error: null,
 };
 
-// Покращений thunk з детальною обробкою помилок
 export const fetchCamperDetails = createAsyncThunk<Camper, string>(
   'camperDetails/fetchById',
   async (id, thunkAPI) => {
@@ -57,7 +56,6 @@ const camperDetailsSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
-    // Додатковий reducer для очищення тільки помилок
     clearError: state => {
       state.error = null;
     },
