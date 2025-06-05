@@ -33,7 +33,6 @@ const CamperDetailsPage: React.FC = () => {
     };
   }, [dispatch]);
 
-  // Preload першого зображення негайно після завантаження даних
   useEffect(() => {
     if (camper?.gallery?.[0]?.thumb) {
       const link = document.createElement('link');
@@ -44,7 +43,9 @@ const CamperDetailsPage: React.FC = () => {
       document.head.appendChild(link);
 
       return () => {
-        document.head.removeChild(link);
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
       };
     }
   }, [camper?.gallery]);

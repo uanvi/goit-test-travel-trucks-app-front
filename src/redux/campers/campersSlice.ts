@@ -92,7 +92,6 @@ export const applyFilters = createAsyncThunk<CampersResponse, FilterParams>(
   },
 );
 
-// Thunk для завантаження наступної сторінки з поточними фільтрами
 export const loadMoreWithFilters = createAsyncThunk<
   CampersResponse,
   number,
@@ -181,7 +180,7 @@ const campersSlice = createSlice({
           state.total = action.payload.total;
           state.hasInitialized = true;
 
-          // Зберігаємо застосовані фільтри
+          // Save applied filters
           if (action.payload.filters) {
             state.activeFilters = action.payload.filters;
             state.isFiltered = true;

@@ -1,4 +1,3 @@
-// src/components/FeatureBadge/FeatureBadge.tsx
 import React from 'react';
 import { Feature } from '../../utils/featuresUtils';
 import './FeatureBadge.css';

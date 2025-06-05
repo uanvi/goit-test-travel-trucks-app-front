@@ -10,15 +10,12 @@ interface CamperFeaturesProps {
 }
 
 const CamperFeatures: React.FC<CamperFeaturesProps> = ({ camper }) => {
-  // ✅ Використовуємо єдиний підхід з utils
   const availableFeatures = getAvailableFeatures(camper);
 
   return (
     <div className="camper-features">
-      {/* Features List - ✅ Спрощений FeaturesList */}
       <FeaturesList features={availableFeatures} className="camper-features__list" />
 
-      {/* Vehicle Details */}
       <div className="camper-features__vehicle-details">
         <VehicleDetails camper={camper} />
       </div>
