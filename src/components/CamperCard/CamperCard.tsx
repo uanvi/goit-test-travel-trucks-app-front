@@ -1,8 +1,8 @@
-// src/components/CamperCard/CamperCard.tsx
 import React from 'react';
 import { Camper } from '../../redux/campers/campersSlice';
 import MainButton from '../MainButton/MainButton';
-import { getDisplayFeatures } from '../../utils/featuresUtils';
+import Icon from '../Icon/Icon';
+import { getDisplayFeatures, getAvailableFeatures } from '../../utils/featuresUtils';
 import './CamperCard.css';
 
 interface CamperCardProps {
@@ -22,8 +22,11 @@ const CamperCard: React.FC<CamperCardProps> = ({
     onToggleFavorite?.(camper.id);
   };
 
-  // ✅ Використовуємо єдиний підхід з utils
-  const displayFeatures = getDisplayFeatures(camper, 6);
+  // ✅ Показуємо 5 features + "+N more" як 6-й елемент
+  const displayFeatures = getDisplayFeatures(camper, 5);
+  const allFeatures = getAvailableFeatures(camper);
+  const hasMoreFeatures = allFeatures.length > 5;
+  const remainingCount = allFeatures.length - 5;
 
   return (
     <div className="camper-card">
@@ -75,17 +78,23 @@ const CamperCard: React.FC<CamperCardProps> = ({
             : camper.description}
         </p>
 
-        {/* Особливості - ✅ Тепер через utils */}
-        <div className="camper-card__features">
+        {/* Особливості - ✅ Єдиний flex контейнер */}
+        <div className="camper-card__features features-list">
           {displayFeatures.map(feature => (
-            <div
-              key={feature.key}
-              className="camper-feature_catalog-feature camper-features__feature"
-            >
-              <span className="camper-card__feature-icon">{feature.icon}</span>
-              <span className="camper-card__feature-label">{feature.label}</span>
+            <div key={feature.key} className="features-list__item">
+              <Icon
+                name={feature.key.toLowerCase() as any}
+                size="small"
+                className="features-list__icon"
+              />
+              <span className="features-list__label">{feature.label}</span>
             </div>
           ))}
+          {hasMoreFeatures && (
+            <div className="features-list__item features-list__item--more">
+              <span>+{remainingCount} more</span>
+            </div>
+          )}
         </div>
 
         {/* Кнопка Show More */}

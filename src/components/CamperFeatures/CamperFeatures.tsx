@@ -1,6 +1,7 @@
 import React from 'react';
 import { Camper } from '../../redux/campers/campersSlice';
 import VehicleDetails from '../VehicleDetails/VehicleDetails';
+import FeaturesList from '../FeaturesList/FeaturesList';
 import { getAvailableFeatures } from '../../utils/featuresUtils';
 import './CamperFeatures.css';
 
@@ -14,18 +15,8 @@ const CamperFeatures: React.FC<CamperFeaturesProps> = ({ camper }) => {
 
   return (
     <div className="camper-features">
-      {/* Features List */}
-      <div className="camper-features__list">
-        {availableFeatures.map(feature => (
-          <div
-            key={feature.key}
-            className="camper-features__feature camper-features__feature_details"
-          >
-            <span className="camper-features__feature-icon">{feature.icon}</span>
-            <span className="camper-features__feature-label">{feature.label}</span>
-          </div>
-        ))}
-      </div>
+      {/* Features List - ✅ Спрощений FeaturesList */}
+      <FeaturesList features={availableFeatures} className="camper-features__list" />
 
       {/* Vehicle Details */}
       <div className="camper-features__vehicle-details">

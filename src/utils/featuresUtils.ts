@@ -1,18 +1,17 @@
-// src/utils/featuresUtils.ts
 import { Camper } from '../redux/campers/campersSlice';
 import { FEATURES_CONFIG, VEHICLE_TYPES_CONFIG } from '../config/featuresConfig';
 
 // ✅ Типи тепер у utils - де їм місце
 export interface FeatureConfig {
   key: keyof Camper;
-  icon: string;
+  icon: string; // Тепер це path до SVG файлу
   label: string;
   filterKey?: string;
 }
 
 export interface Feature {
   key: keyof Camper;
-  icon: string;
+  icon: string; // Тепер це path до SVG файлу
   label: string;
   condition?: boolean;
 }
@@ -20,7 +19,7 @@ export interface Feature {
 export interface VehicleTypeConfig {
   value: string;
   label: string;
-  icon: string;
+  icon: string; // Тепер це path до SVG файлу
 }
 
 // ✅ Типізовані референси на конфіг
@@ -44,8 +43,10 @@ export const getAvailableFeatures = (camper: Camper): Feature[] => {
   );
 };
 
-export const getDisplayFeatures = (camper: Camper, maxCount = 6): Feature[] => {
-  return getAvailableFeatures(camper).slice(0, maxCount);
+// ✅ Повертаємо параметр maxCount
+export const getDisplayFeatures = (camper: Camper, maxCount?: number): Feature[] => {
+  const features = getAvailableFeatures(camper);
+  return maxCount ? features.slice(0, maxCount) : features;
 };
 
 // ✅ Утиліти для фільтрів

@@ -1,0 +1,15 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon--small {
+  width: 20px;
+  height: 20px;
+}
+
+.icon--medium {
+  width: 32px;
+  height: 32px;
+}
