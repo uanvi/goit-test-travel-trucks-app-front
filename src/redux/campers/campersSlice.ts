@@ -1,6 +1,8 @@
+// src/redux/campers/campersSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getCampersByPage } from '../../api/campersApi';
 import { CAMPERS_PER_PAGE } from '../../config/apiConfig';
+import { FilterState } from '../filters/filtersSlice';
 
 export interface Camper {
   id: string;
@@ -46,6 +48,8 @@ interface CampersState {
   currentPage: number;
   total: number;
   hasInitialized: boolean;
+  activeFilters: FilterState | null; // Зберігаємо поточні фільтри
+  isFiltered: boolean; // Чи застосовані фільтри
 }
 
 const initialState: CampersState = {
@@ -55,14 +59,33 @@ const initialState: CampersState = {
   currentPage: 0,
   total: 0,
   hasInitialized: false,
+  activeFilters: null,
+  isFiltered: false,
 };
 
-export const fetchCampers = createAsyncThunk<CampersResponse, { page: number; reset?: boolean }>(
-  'campers/fetchByPage',
-  async ({ page, reset = false }, thunkAPI) => {
+// Оновлений thunk з підтримкою фільтрів
+export const fetchCampers = createAsyncThunk<
+  CampersResponse,
+  { page: number; reset?: boolean; filters?: FilterState }
+>('campers/fetchByPage', async ({ page, reset = false, filters }, thunkAPI) => {
+  try {
+    const data = await getCampersByPage(page, CAMPERS_PER_PAGE, filters);
+    return { ...data, reset, filters };
+  } catch (error) {
+    if (error instanceof Error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+    return thunkAPI.rejectWithValue('Unknown error');
+  }
+});
+
+// Новий thunk для застосування фільтрів
+export const applyFilters = createAsyncThunk<CampersResponse, FilterState>(
+  'campers/applyFilters',
+  async (filters, thunkAPI) => {
     try {
-      const data = await getCampersByPage(page, CAMPERS_PER_PAGE);
-      return { ...data, reset };
+      const data = await getCampersByPage(1, CAMPERS_PER_PAGE, filters);
+      return { ...data, filters };
     } catch (error) {
       if (error instanceof Error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -71,6 +94,26 @@ export const fetchCampers = createAsyncThunk<CampersResponse, { page: number; re
     }
   },
 );
+
+// Thunk для завантаження наступної сторінки з поточними фільтрами
+export const loadMoreWithFilters = createAsyncThunk<
+  CampersResponse,
+  number,
+  { state: { campers: CampersState } }
+>('campers/loadMoreWithFilters', async (page, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    const filters = state.campers.activeFilters;
+
+    const data = await getCampersByPage(page, CAMPERS_PER_PAGE, filters || undefined);
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+    return thunkAPI.rejectWithValue('Unknown error');
+  }
+});
 
 const campersSlice = createSlice({
   name: 'campers',
@@ -82,17 +125,28 @@ const campersSlice = createSlice({
       state.total = 0;
       state.error = null;
       state.hasInitialized = false;
+      state.activeFilters = null;
+      state.isFiltered = false;
+    },
+
+    clearFilters: state => {
+      state.activeFilters = null;
+      state.isFiltered = false;
     },
   },
   extraReducers: builder => {
     builder
+      // Звичайне завантаження кемперів
       .addCase(fetchCampers.pending, state => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
         fetchCampers.fulfilled,
-        (state, action: PayloadAction<CampersResponse & { reset?: boolean }>) => {
+        (
+          state,
+          action: PayloadAction<CampersResponse & { reset?: boolean; filters?: FilterState }>,
+        ) => {
           state.loading = false;
           state.hasInitialized = true;
 
@@ -107,15 +161,63 @@ const campersSlice = createSlice({
           }
 
           state.total = action.payload.total;
+
+          // Оновлюємо інформацію про фільтри
+          if (action.payload.filters) {
+            state.activeFilters = action.payload.filters;
+            state.isFiltered = true;
+          }
         },
       )
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
         state.hasInitialized = true;
+      })
+
+      // Застосування фільтрів
+      .addCase(applyFilters.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        applyFilters.fulfilled,
+        (state, action: PayloadAction<CampersResponse & { filters?: FilterState }>) => {
+          state.loading = false;
+          state.items = action.payload.items;
+          state.currentPage = 1;
+          state.total = action.payload.total;
+          state.hasInitialized = true;
+
+          // Зберігаємо застосовані фільтри
+          if (action.payload.filters) {
+            state.activeFilters = action.payload.filters;
+            state.isFiltered = true;
+          }
+        },
+      )
+      .addCase(applyFilters.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // Завантаження більше з фільтрами
+      .addCase(loadMoreWithFilters.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loadMoreWithFilters.fulfilled, (state, action: PayloadAction<CampersResponse>) => {
+        state.loading = false;
+        state.items.push(...action.payload.items);
+        state.currentPage += 1;
+        state.total = action.payload.total;
+      })
+      .addCase(loadMoreWithFilters.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export const { resetCampers } = campersSlice.actions;
+export const { resetCampers, clearFilters } = campersSlice.actions;
 export default campersSlice.reducer;

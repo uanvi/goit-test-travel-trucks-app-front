@@ -1,7 +1,7 @@
 // src/components/CamperCard/CamperCard.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Camper } from '../../redux/campers/campersSlice';
+import MainButton from '../MainButton/MainButton';
 import './CamperCard.css';
 
 interface CamperCardProps {
@@ -60,7 +60,7 @@ const CamperCard: React.FC<CamperCardProps> = ({
         <div className="camper-card__header">
           <div className="camper-card__title-section">
             <h3 className="camper-card__title">{camper.name}</h3>
-            <div className="camper-card__price">€{camper.price.toFixed(2)}</div>
+            <div className="camper-card__price">€{camper.price}</div>
             <button
               className={`camper-card__favorite ${
                 isFavorite ? 'camper-card__favorite--active' : ''
@@ -107,9 +107,9 @@ const CamperCard: React.FC<CamperCardProps> = ({
         </div>
 
         {/* Кнопка Show More */}
-        <Link to={`/catalog/${camper.id}`} className="camper-card__button">
+        <MainButton href={`/catalog/${camper.id}`} size="default">
           Show more
-        </Link>
+        </MainButton>
       </div>
     </div>
   );

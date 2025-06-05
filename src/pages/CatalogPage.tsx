@@ -1,10 +1,13 @@
 // src/pages/CatalogPage.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCampers } from '../redux/campers/campersSlice';
+import { fetchCampers, applyFilters, loadMoreWithFilters } from '../redux/campers/campersSlice';
+import { setAllFilters } from '../redux/filters/filtersSlice';
 import { AppDispatch, RootState } from '../redux/store';
 import ErrorBlock from '../components/ErrorBlock';
 import CamperCard from '../components/CamperCard/CamperCard';
+import FilterSidebar, { FilterParams } from '../components/FilterSidebar/FilterSidebar';
+import MainButton from '../components/MainButton/MainButton';
 import { TEXTS } from '../config/textsConfig';
 import './CatalogPage.css';
 
@@ -24,8 +27,13 @@ const CatalogPage: React.FC = () => {
     currentPage,
     total,
     hasInitialized: storeInitialized,
+    isFiltered,
+    activeFilters,
   } = useSelector((state: RootState) => state.campers);
 
+  const filters = useSelector((state: RootState) => state.filters);
+
+  // Початкове завантаження кемперів
   useEffect(() => {
     if (hasInitialized.current || storeInitialized) return;
     hasInitialized.current = true;
@@ -37,15 +45,35 @@ const CatalogPage: React.FC = () => {
     localStorage.setItem('favoriteCampers', JSON.stringify(favorites));
   }, [favorites]);
 
+  const handleFilterChange = (newFilters: FilterParams) => {
+    // Оновлюємо Redux стор з фільтрами
+    dispatch(setAllFilters(newFilters));
+
+    // Застосовуємо фільтри і завантажуємо кемперів
+    dispatch(applyFilters(newFilters));
+  };
+
   const handleLoadMore = () => {
     if (!loading && items.length < total) {
-      dispatch(fetchCampers({ page: currentPage + 1 }));
+      if (isFiltered) {
+        // Якщо є активні фільтри, використовуємо спеціальний thunk
+        dispatch(loadMoreWithFilters(currentPage + 1));
+      } else {
+        // Звичайне завантаження
+        dispatch(fetchCampers({ page: currentPage + 1 }));
+      }
     }
   };
 
   const handleRetryCurrentPage = () => {
-    const page = items.length > 0 ? currentPage + 1 : 1;
-    dispatch(fetchCampers({ page, reset: page === 1 }));
+    if (isFiltered && activeFilters) {
+      // Повторюємо із фільтрами
+      dispatch(applyFilters(activeFilters));
+    } else {
+      // Звичайне повторення
+      const page = items.length > 0 ? currentPage + 1 : 1;
+      dispatch(fetchCampers({ page, reset: page === 1 }));
+    }
   };
 
   const handleToggleFavorite = (camperId: string) => {
@@ -55,23 +83,60 @@ const CatalogPage: React.FC = () => {
   };
 
   const hasMoreCampers = items.length < total;
+  const isLoading = loading;
 
   return (
     <div className="catalog-page">
-      {/* TODO: Тут буде FilterSidebar */}
+      {/* Filter Sidebar */}
       <div className="catalog-page__sidebar">
-        <div className="filter-placeholder">
-          <h3>Filters</h3>
-          <p>Filter sidebar will be implemented next</p>
-        </div>
+        <FilterSidebar onFilterChange={handleFilterChange} isLoading={isLoading} />
       </div>
 
       {/* Основний контент */}
       <div className="catalog-page__content">
+        {/* Заголовок з інформацією про фільтри */}
+        <div className="catalog-page__header">
+          {isFiltered && (
+            <div className="catalog-page__filter-info">
+              <p className="catalog-page__results-count">
+                Found {total} camper{total !== 1 ? 's' : ''}
+              </p>
+
+              {activeFilters && (
+                <div className="catalog-page__active-filters">
+                  {activeFilters.location && (
+                    <span className="catalog-page__filter-tag">📍 {activeFilters.location}</span>
+                  )}
+                  {activeFilters.form && (
+                    <span className="catalog-page__filter-tag">🚐 {activeFilters.form}</span>
+                  )}
+                  {Object.entries(activeFilters.equipment).map(([key, value]) => {
+                    if (value === true) {
+                      return (
+                        <span key={key} className="catalog-page__filter-tag">
+                          ✓ {key}
+                        </span>
+                      );
+                    }
+                    if (typeof value === 'string' && value.trim()) {
+                      return (
+                        <span key={key} className="catalog-page__filter-tag">
+                          ⚙️ {value}
+                        </span>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Стани завантаження та помилок */}
         {loading && items.length === 0 && (
           <div className="catalog-page__loading">
-            <p>{TEXTS.loading.initial}</p>
+            <p>{isFiltered ? 'Searching campers...' : TEXTS.loading.initial}</p>
           </div>
         )}
 
@@ -105,23 +170,31 @@ const CatalogPage: React.FC = () => {
         {/* Кнопка Load More */}
         {!loading && hasMoreCampers && (
           <div className="catalog-page__load-more">
-            <button onClick={handleLoadMore} className="catalog-page__load-more-button">
+            <MainButton variant="secondary" onClick={handleLoadMore}>
               {TEXTS.buttons.loadMore}
-            </button>
+            </MainButton>
           </div>
         )}
 
         {/* Повідомлення про завершення */}
         {!loading && !hasMoreCampers && items.length > 0 && (
           <div className="catalog-page__all-loaded">
-            <p>{TEXTS.catalog.allLoaded}</p>
+            <p>
+              {isFiltered
+                ? `All ${total} filtered camper${total !== 1 ? 's' : ''} loaded!`
+                : TEXTS.catalog.allLoaded}
+            </p>
           </div>
         )}
 
         {/* Порожній стан */}
         {!loading && items.length === 0 && !error && (
           <div className="catalog-page__empty">
-            <p>No campers found</p>
+            <p>
+              {isFiltered
+                ? 'No campers match your filters. Try adjusting your search criteria.'
+                : 'No campers found'}
+            </p>
           </div>
         )}
       </div>

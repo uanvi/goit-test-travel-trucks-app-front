@@ -1,0 +1,262 @@
+/* src/components/FilterSidebar/FilterSidebar.css */
+
+.filter-sidebar {
+  width: 360px;
+  background: var(--color-bg-primary);
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.filter-sidebar__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Section Styling */
+.filter-sidebar__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.filter-sidebar__label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.filter-sidebar__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.filter-sidebar__subtitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.filter-sidebar__divider {
+  height: 1px;
+  background-color: var(--color-border-light);
+  margin: var(--space-lg) 0;
+}
+
+/* Location Input - тепер використовуємо LocationAutocomplete */
+/* Стилі перенесені в LocationAutocomplete.css */
+
+/* Equipment Grid */
+.filter-sidebar__equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.filter-sidebar__equipment-item {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-medium);
+  transition: all 0.2s ease;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 96px;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.filter-sidebar__equipment-item:hover {
+  border-color: var(--color-accent-red);
+}
+
+.filter-sidebar__equipment-item:has(.filter-sidebar__checkbox:checked) {
+  border-color: var(--color-accent-red);
+  background-color: rgba(228, 72, 72, 0.05);
+}
+
+.filter-sidebar__checkbox,
+.filter-sidebar__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.filter-sidebar__equipment-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+  width: 100%;
+}
+
+.filter-sidebar__equipment-icon {
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+}
+
+.filter-sidebar__equipment-label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* Vehicle Type Grid */
+.filter-sidebar__vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.filter-sidebar__vehicle-item {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-medium);
+  transition: all 0.2s ease;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 96px;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.filter-sidebar__vehicle-item:hover {
+  border-color: var(--color-accent-red);
+}
+
+.filter-sidebar__vehicle-item:has(.filter-sidebar__radio:checked) {
+  border-color: var(--color-accent-red);
+  background-color: rgba(228, 72, 72, 0.05);
+}
+
+.filter-sidebar__vehicle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+  width: 100%;
+}
+
+.filter-sidebar__vehicle-icon {
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+}
+
+.filter-sidebar__vehicle-label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+/* Action Buttons */
+.filter-sidebar__actions {
+  display: block;
+  margin-top: var(--space-lg);
+}
+
+.filter-sidebar__actions .main-button {
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+
+.filter-sidebar__actions .main-button:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .filter-sidebar {
+    width: 280px;
+    padding: var(--space-xl);
+  }
+
+  .filter-sidebar__equipment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .filter-sidebar__equipment-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .filter-sidebar__equipment-item,
+  .filter-sidebar__vehicle-item {
+    min-height: 80px;
+    padding: var(--space-md);
+  }
+
+  .filter-sidebar__equipment-icon,
+  .filter-sidebar__vehicle-icon {
+    font-size: var(--font-size-xl);
+  }
+
+  .filter-sidebar__equipment-label,
+  .filter-sidebar__vehicle-label {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-sidebar {
+    padding: var(--space-lg);
+  }
+
+  .filter-sidebar__equipment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-sidebar__equipment-item,
+  .filter-sidebar__vehicle-item {
+    min-height: 70px;
+    padding: var(--space-sm);
+  }
+
+  .filter-sidebar__equipment-icon,
+  .filter-sidebar__vehicle-icon {
+    font-size: var(--font-size-lg);
+  }
+
+  .filter-sidebar__equipment-label,
+  .filter-sidebar__vehicle-label {
+    font-size: var(--font-size-xs);
+  }
+
+  .filter-sidebar__search-btn {
+    height: 48px;
+    padding: var(--space-md) var(--space-2xl);
+  }
+}
