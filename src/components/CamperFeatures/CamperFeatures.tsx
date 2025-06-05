@@ -41,7 +41,10 @@ const CamperFeatures: React.FC<CamperFeaturesProps> = ({ camper }) => {
       {/* Features List */}
       <div className="camper-features__list">
         {availableFeatures.map(feature => (
-          <div key={feature.key} className="camper-features__feature">
+          <div
+            key={feature.key}
+            className="camper-features__feature camper-features__feature_details"
+          >
             <span className="camper-features__feature-icon">{feature.icon}</span>
             <span className="camper-features__feature-label">{feature.label}</span>
           </div>

@@ -155,47 +155,16 @@
   margin: 0;
 }
 
-/* Особливості та кнопка */
-.camper-card__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--space-lg);
-  margin-top: auto;
-}
-
 /* Особливості */
 .camper-card__features {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  flex: 1;
 }
 
-.camper-card__feature {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-lg);
-  background-color: var(--color-bg-badge);
-  border-radius: var(--radius-large);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
-  height: 48px;
-  min-width: max-content;
+.camper-feature_catalog-feature {
+  background-color: var(--color-bg-tertiary);
 }
-
-.camper-card__feature-icon {
-  font-size: var(--font-size-xl);
-  line-height: 1;
-}
-
-.camper-card__feature-label {
-  text-transform: capitalize;
-}
-
 /* Кнопка */
 .camper-card__button {
   display: inline-flex;
@@ -215,6 +184,7 @@
   height: 56px;
   min-width: max-content;
   align-self: flex-start;
+  margin-top: auto;
 }
 
 .camper-card__button:hover {
@@ -269,16 +239,6 @@
     gap: var(--space-xs);
   }
 
-  .camper-card__feature {
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-size-sm);
-    height: 40px;
-  }
-
-  .camper-card__feature-icon {
-    font-size: var(--font-size-base);
-  }
-
   .camper-card__button {
     width: 100%;
     padding: var(--space-md) var(--space-2xl);
@@ -307,12 +267,5 @@
 
   .camper-card__features {
     gap: var(--space-xs);
-  }
-
-  .camper-card__feature {
-    padding: var(--space-xs) var(--space-md);
-    font-size: var(--font-size-xs);
-    gap: var(--space-xs);
-    height: 36px;
   }
 }
