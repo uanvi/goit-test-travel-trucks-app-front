@@ -3,7 +3,6 @@ export const FEATURES_CONFIG = [
     key: 'transmission',
     icon: '/src/assets/icons/transmission.svg',
     label: 'transmission',
-    // filterKey видалений - не буде у фільтрах
   },
   {
     key: 'engine',
@@ -14,55 +13,55 @@ export const FEATURES_CONFIG = [
     key: 'AC',
     icon: '/src/assets/icons/ac.svg',
     label: 'AC',
-    filterKey: 'AC',
+    filterKey: 'AC', // This IS a filter
   },
   {
     key: 'bathroom',
     icon: '/src/assets/icons/bathroom.svg',
     label: 'Bathroom',
-    filterKey: 'bathroom',
+    filterKey: 'bathroom', // This IS a filter
   },
   {
     key: 'kitchen',
     icon: '/src/assets/icons/kitchen.svg',
     label: 'Kitchen',
-    filterKey: 'kitchen',
+    filterKey: 'kitchen', // This IS a filter
   },
   {
     key: 'TV',
     icon: '/src/assets/icons/tv.svg',
     label: 'TV',
-    filterKey: 'TV',
+    filterKey: 'TV', // This IS a filter
   },
   {
     key: 'radio',
     icon: '/src/assets/icons/radio.svg',
     label: 'Radio',
-    filterKey: 'radio',
+    filterKey: 'radio', // This IS a filter
   },
   {
     key: 'refrigerator',
     icon: '/src/assets/icons/refrigerator.svg',
     label: 'Refrigerator',
-    filterKey: 'refrigerator',
+    filterKey: 'refrigerator', // This IS a filter
   },
   {
     key: 'microwave',
     icon: '/src/assets/icons/microwave.svg',
     label: 'Microwave',
-    filterKey: 'microwave',
+    filterKey: 'microwave', // This IS a filter
   },
   {
     key: 'gas',
     icon: '/src/assets/icons/gas.svg',
     label: 'Gas',
-    filterKey: 'gas',
+    filterKey: 'gas', // This IS a filter
   },
   {
     key: 'water',
     icon: '/src/assets/icons/water.svg',
     label: 'Water',
-    filterKey: 'water',
+    filterKey: 'water', // This IS a filter
   },
 ] as const;
 

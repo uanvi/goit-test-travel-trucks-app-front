@@ -1,5 +1,3 @@
-/* src/components/FeatureBadge/FeatureBadge.css */
-
 .feature-badge {
   display: flex;
   align-items: center;
@@ -15,12 +13,10 @@
   font-family: 'Inter', var(--font-family-primary);
 }
 
-/* Варіант для карток каталогу */
 .feature-badge--card {
   background-color: var(--color-bg-badge);
 }
 
-/* Варіант для деталей кемпера */
 .feature-badge--details {
   background-color: rgba(242, 244, 247, 1);
 }

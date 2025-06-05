@@ -16,10 +16,9 @@
   font-weight: var(--font-weight-medium);
   height: 48px;
   min-width: max-content;
-  background-color: var(--color-bg-tertiary); /* Однаковий колір скрізь */
+  background-color: var(--color-bg-tertiary);
 }
 
-/* Стиль для "+N more" badge */
 .features-list__item--more {
   background-color: var(--color-bg-secondary);
   color: var(--color-text-secondary);

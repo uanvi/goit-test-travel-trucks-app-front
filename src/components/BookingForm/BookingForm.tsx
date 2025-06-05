@@ -1,4 +1,3 @@
-// src/components/BookingForm/BookingForm.tsx
 import React, { useState } from 'react';
 import MainButton from '../MainButton/MainButton';
 import './BookingForm.css';
@@ -32,11 +31,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Додати логіку відправки форми
     console.log('Booking data:', { ...formData, camperName });
     alert(`Booking request sent for ${camperName}!`);
 
-    // Очищуємо форму після відправки
     setFormData({
       name: '',
       email: '',

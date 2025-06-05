@@ -1,4 +1,3 @@
-// src/components/LocationAutocomplete/LocationAutocomplete.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { getUniqueLocations } from '../../api/campersApi';
 import './LocationAutocomplete.css';
@@ -23,7 +22,6 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  // Завантажуємо список локацій при монтажі
   useEffect(() => {
     const loadLocations = async () => {
       try {
@@ -37,7 +35,6 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
     loadLocations();
   }, []);
 
-  // Фільтруємо локації при зміні значення
   useEffect(() => {
     if (!value.trim()) {
       setFilteredLocations([]);
@@ -94,7 +91,6 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   };
 
   const handleBlur = (e: React.FocusEvent) => {
-    // Затримка для дозволу кліку по опції
     setTimeout(() => {
       if (!e.currentTarget.contains(document.activeElement)) {
         setIsOpen(false);

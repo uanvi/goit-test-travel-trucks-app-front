@@ -15,7 +15,6 @@ const CamperDetailsContent: React.FC<CamperDetailsContentProps> = ({ camper }) =
 
   return (
     <div className="camper-details-content">
-      {/* Tabs Navigation */}
       <div className="camper-details-content__tabs-nav">
         <button
           className={`camper-details-content__tab ${
@@ -36,7 +35,6 @@ const CamperDetailsContent: React.FC<CamperDetailsContentProps> = ({ camper }) =
         </button>
       </div>
 
-      {/* Tab Content */}
       <div className="camper-details-content__tabs-section">
         <div className="camper-details-content__tab-content">
           {activeTab === 'features' && <CamperFeatures camper={camper} />}
@@ -44,7 +42,6 @@ const CamperDetailsContent: React.FC<CamperDetailsContentProps> = ({ camper }) =
         </div>
       </div>
 
-      {/* Booking Form */}
       <div className="camper-details-content__booking-section">
         <BookingForm camperName={camper.name} />
       </div>

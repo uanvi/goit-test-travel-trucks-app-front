@@ -1,4 +1,3 @@
-// src/components/MainButton/MainButton.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MainButton.css';
@@ -29,7 +28,7 @@ const MainButton: React.FC<MainButtonProps> = ({
   const baseClasses = `main-button main-button--${variant} main-button--${size}`;
   const classes = `${baseClasses} ${className}`.trim();
 
-  // Якщо є href, рендеримо як Link
+  // If href exists, render as Link
   if (href) {
     return (
       <Link to={href} className={classes}>
@@ -38,7 +37,7 @@ const MainButton: React.FC<MainButtonProps> = ({
     );
   }
 
-  // Рендеримо як button
+  // Render as button
   return (
     <button type={type} className={classes} disabled={disabled || loading} onClick={onClick}>
       {loading ? 'Loading...' : children}
