@@ -1,4 +1,3 @@
-// src/api/campersApi.ts
 import axios from 'axios';
 import { API_BASE_URL } from '../config/apiConfig';
 import { FilterState } from '../redux/filters/filtersSlice';
@@ -30,15 +29,12 @@ export const getCamperById = async (id: string) => {
   return response.data;
 };
 
-// Оновлена функція з підтримкою фільтрів
 export const getCampersByPage = async (page: number, limit: number, filters?: FilterState) => {
-  // Формуємо параметри запиту
   const params: CampersApiParams = {
     page,
     limit,
   };
 
-  // Додаємо фільтри якщо вони є
   if (filters) {
     if (filters.location.trim()) {
       params.location = filters.location.trim();
@@ -48,12 +44,11 @@ export const getCampersByPage = async (page: number, limit: number, filters?: Fi
       params.form = filters.form;
     }
 
-    // Додаємо фільтри обладнання тільки якщо вони true
     Object.entries(filters.equipment).forEach(([key, value]) => {
       if (value === true) {
-        params[key as keyof CampersApiParams] = true;
+        (params as any)[key] = true;
       } else if (typeof value === 'string' && value.trim()) {
-        params[key as keyof CampersApiParams] = value.trim();
+        (params as any)[key] = value.trim();
       }
     });
   }
@@ -62,13 +57,11 @@ export const getCampersByPage = async (page: number, limit: number, filters?: Fi
   return response.data;
 };
 
-// Функція для отримання унікальних локацій (для автокомпліту)
 export const getUniqueLocations = async (): Promise<string[]> => {
   try {
     const response = await axios.get(API_BASE_URL);
     const campers = response.data.items;
 
-    // Витягуємо унікальні локації
     const locations = Array.from(
       new Set(campers.map((camper: any) => camper.location).filter(Boolean)),
     ) as string[];
@@ -80,7 +73,6 @@ export const getUniqueLocations = async (): Promise<string[]> => {
   }
 };
 
-// Функція для отримання статистики фільтрів (скільки кемперів відповідає кожному фільтру)
 export const getFilterStats = async () => {
   try {
     const response = await axios.get(API_BASE_URL);
@@ -105,17 +97,14 @@ export const getFilterStats = async () => {
     };
 
     campers.forEach((camper: any) => {
-      // Статистика за формою
       if (camper.form) {
         stats.byForm[camper.form] = (stats.byForm[camper.form] || 0) + 1;
       }
 
-      // Статистика за локацією
       if (camper.location) {
         stats.byLocation[camper.location] = (stats.byLocation[camper.location] || 0) + 1;
       }
 
-      // Статистика за обладнанням
       if (camper.AC) stats.byEquipment.AC++;
       if (camper.transmission === 'automatic') stats.byEquipment.transmission.automatic++;
       if (camper.transmission === 'manual') stats.byEquipment.transmission.manual++;
