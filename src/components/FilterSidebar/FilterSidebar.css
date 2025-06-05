@@ -18,7 +18,8 @@
 .filter-sidebar__section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
 }
 
 .filter-sidebar__label {
@@ -30,13 +31,11 @@
 }
 
 .filter-sidebar__title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
   margin: 0;
-  padding-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--color-border-light);
 }
 
 .filter-sidebar__subtitle {
@@ -259,4 +258,33 @@
     height: 48px;
     padding: var(--space-md) var(--space-2xl);
   }
+}
+
+.filter-sidebar__equipment-content,
+.filter-sidebar__vehicle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+  width: 100%;
+}
+
+/* Видаляємо старі стилі для емодзі іконок */
+.filter-sidebar__equipment-icon,
+.filter-sidebar__vehicle-icon {
+  /* Стилі тепер керуються Icon компонентом */
+  color: var(--color-text-primary);
+}
+
+/* Забезпечуємо правильне відображення SVG іконок */
+.filter-sidebar__equipment-item:hover .filter-sidebar__equipment-icon,
+.filter-sidebar__vehicle-item:hover .filter-sidebar__vehicle-icon {
+  color: var(--color-accent-red);
+}
+
+.filter-sidebar__equipment-item:has(.filter-sidebar__checkbox:checked)
+  .filter-sidebar__equipment-icon,
+.filter-sidebar__vehicle-item:has(.filter-sidebar__radio:checked) .filter-sidebar__vehicle-icon {
+  color: var(--color-accent-red);
 }

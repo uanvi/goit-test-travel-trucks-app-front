@@ -10,9 +10,9 @@
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 var(--space-6xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +27,14 @@
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: color 0.2s ease;
+}
+
+.logo-primary {
+  color: var(--color-text-primary);
+}
+
+.logo-secondary {
+  color: var(--color-text-secondary);
 }
 
 .header-logo:hover {

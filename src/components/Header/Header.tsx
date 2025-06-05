@@ -19,7 +19,8 @@ const Header: React.FC = () => {
       <div className="header-container">
         {/* Logo */}
         <Link to="/" className="header-logo">
-          TravelTrucks
+          <span className="logo-primary">Travel</span>
+          <span className="logo-secondary">Trucks</span>
         </Link>
 
         {/* Navigation */}

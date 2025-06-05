@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LocationAutocomplete from '../LocationAutocomplete/LocationAutocomplete';
 import MainButton from '../MainButton/MainButton';
+import Icon from '../Icon/Icon';
 import { getFilterableFeatures, getVehicleTypes } from '../../utils/featuresUtils';
 import './FilterSidebar.css';
 
@@ -127,7 +128,11 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
                   disabled={isLoading}
                 />
                 <div className="filter-sidebar__equipment-content">
-                  <span className="filter-sidebar__equipment-icon">{feature.icon}</span>
+                  <Icon
+                    name={feature.key.toLowerCase() as any}
+                    size="medium"
+                    className="filter-sidebar__equipment-icon"
+                  />
                   <span className="filter-sidebar__equipment-label">
                     {feature.filterKey === 'transmission' ? 'Automatic' : feature.label}
                   </span>
@@ -155,7 +160,11 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
                   disabled={isLoading}
                 />
                 <div className="filter-sidebar__vehicle-content">
-                  <span className="filter-sidebar__vehicle-icon">{type.icon}</span>
+                  <Icon
+                    name={type.value as any}
+                    size="medium"
+                    className="filter-sidebar__vehicle-icon"
+                  />
                   <span className="filter-sidebar__vehicle-label">{type.label}</span>
                 </div>
               </label>

@@ -1,0 +1,54 @@
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.features-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  height: 48px;
+  min-width: max-content;
+  background-color: var(--color-bg-tertiary); /* Однаковий колір скрізь */
+}
+
+/* Стиль для "+N more" badge */
+.features-list__item--more {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  border: 1px dashed var(--color-border-light);
+}
+
+.features-list__label {
+  text-transform: capitalize;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .features-list {
+    gap: var(--space-xs);
+  }
+
+  .features-list__item {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-list__item {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-xs);
+    gap: var(--space-xs);
+    height: 36px;
+  }
+}
