@@ -2,6 +2,7 @@
 import React from 'react';
 import { Camper } from '../../redux/campers/campersSlice';
 import MainButton from '../MainButton/MainButton';
+import { getDisplayFeatures } from '../../utils/featuresUtils';
 import './CamperCard.css';
 
 interface CamperCardProps {
@@ -21,27 +22,8 @@ const CamperCard: React.FC<CamperCardProps> = ({
     onToggleFavorite?.(camper.id);
   };
 
-  const features = [
-    { key: 'transmission' as keyof Camper, icon: '⚙️', label: camper.transmission },
-    { key: 'engine' as keyof Camper, icon: '⛽', label: camper.engine },
-    { key: 'AC' as keyof Camper, icon: '❄️', label: 'AC', condition: camper.AC },
-    { key: 'bathroom' as keyof Camper, icon: '🚿', label: 'Bathroom', condition: camper.bathroom },
-    { key: 'kitchen' as keyof Camper, icon: '🍳', label: 'Kitchen', condition: camper.kitchen },
-    { key: 'TV' as keyof Camper, icon: '📺', label: 'TV', condition: camper.TV },
-    { key: 'radio' as keyof Camper, icon: '📻', label: 'Radio', condition: camper.radio },
-    {
-      key: 'refrigerator' as keyof Camper,
-      icon: '🧊',
-      label: 'Refrigerator',
-      condition: camper.refrigerator,
-    },
-  ];
-
-  const availableFeatures = features.filter(
-    feature => feature.condition !== false && (feature.condition === true || feature.label),
-  );
-
-  const displayFeatures = availableFeatures.slice(0, 6); // Показуємо максимум 6 особливостей
+  // ✅ Використовуємо єдиний підхід з utils
+  const displayFeatures = getDisplayFeatures(camper, 6);
 
   return (
     <div className="camper-card">
@@ -93,7 +75,7 @@ const CamperCard: React.FC<CamperCardProps> = ({
             : camper.description}
         </p>
 
-        {/* Особливості */}
+        {/* Особливості - ✅ Тепер через utils */}
         <div className="camper-card__features">
           {displayFeatures.map(feature => (
             <div

@@ -1,9 +1,10 @@
-// src/components/FilterSidebar/FilterSidebar.tsx
 import React, { useState } from 'react';
 import LocationAutocomplete from '../LocationAutocomplete/LocationAutocomplete';
 import MainButton from '../MainButton/MainButton';
+import { getFilterableFeatures, getVehicleTypes } from '../../utils/featuresUtils';
 import './FilterSidebar.css';
 
+// Локальний інтерфейс для FilterSidebar (не пов'язаний з Redux)
 export interface FilterParams {
   location: string;
   form: string;
@@ -26,23 +27,31 @@ interface FilterSidebarProps {
   isLoading?: boolean;
 }
 
+// Початкові значення фільтрів
+const initialFilters: FilterParams = {
+  location: '',
+  form: '',
+  equipment: {
+    AC: false,
+    transmission: '',
+    kitchen: false,
+    TV: false,
+    bathroom: false,
+    refrigerator: false,
+    microwave: false,
+    gas: false,
+    water: false,
+    radio: false,
+  },
+};
+
 const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading = false }) => {
-  const [filters, setFilters] = useState<FilterParams>({
-    location: '',
-    form: '',
-    equipment: {
-      AC: false,
-      transmission: '',
-      kitchen: false,
-      TV: false,
-      bathroom: false,
-      refrigerator: false,
-      microwave: false,
-      gas: false,
-      water: false,
-      radio: false,
-    },
-  });
+  // Локальний стан фільтрів (не пов'язаний з Redux)
+  const [filters, setFilters] = useState<FilterParams>(initialFilters);
+
+  // ✅ Отримуємо особливості та типи через утиліти
+  const filterableFeatures = getFilterableFeatures();
+  const vehicleTypes = getVehicleTypes();
 
   const handleLocationChange = (value: string) => {
     const newFilters = { ...filters, location: value };
@@ -68,44 +77,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
   };
 
   const handleReset = () => {
-    const resetFilters: FilterParams = {
-      location: '',
-      form: '',
-      equipment: {
-        AC: false,
-        transmission: '',
-        kitchen: false,
-        TV: false,
-        bathroom: false,
-        refrigerator: false,
-        microwave: false,
-        gas: false,
-        water: false,
-        radio: false,
-      },
-    };
-    setFilters(resetFilters);
-    onFilterChange(resetFilters);
+    setFilters(initialFilters);
+    onFilterChange(initialFilters);
   };
-
-  const vehicleTypes = [
-    { value: 'panelTruck', label: 'Van', icon: '🚐' },
-    { value: 'fullyIntegrated', label: 'Fully Integrated', icon: '🚌' },
-    { value: 'alcove', label: 'Alcove', icon: '🏠' },
-  ];
-
-  const equipmentOptions = [
-    { key: 'AC' as const, label: 'AC', icon: '❄️' },
-    { key: 'transmission' as const, label: 'Automatic', icon: '⚙️' },
-    { key: 'kitchen' as const, label: 'Kitchen', icon: '🍳' },
-    { key: 'TV' as const, label: 'TV', icon: '📺' },
-    { key: 'bathroom' as const, label: 'Bathroom', icon: '🚿' },
-    { key: 'refrigerator' as const, label: 'Refrigerator', icon: '🧊' },
-    { key: 'microwave' as const, label: 'Microwave', icon: '🔥' },
-    { key: 'gas' as const, label: 'Gas', icon: '🔥' },
-    { key: 'water' as const, label: 'Water', icon: '💧' },
-    { key: 'radio' as const, label: 'Radio', icon: '📻' },
-  ];
 
   return (
     <aside className="filter-sidebar">
@@ -130,28 +104,33 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
           <div className="filter-sidebar__divider"></div>
 
           <div className="filter-sidebar__equipment-grid">
-            {equipmentOptions.map(option => (
-              <label key={option.key} className="filter-sidebar__equipment-item">
+            {filterableFeatures.map(feature => (
+              <label key={feature.filterKey} className="filter-sidebar__equipment-item">
                 <input
                   type="checkbox"
                   checked={
-                    option.key === 'transmission'
+                    feature.filterKey === 'transmission'
                       ? filters.equipment.transmission === 'automatic'
-                      : !!filters.equipment[option.key]
+                      : !!(filters.equipment as any)[feature.filterKey!]
                   }
                   onChange={e => {
-                    if (option.key === 'transmission') {
+                    if (feature.filterKey === 'transmission') {
                       handleEquipmentChange('transmission', e.target.checked ? 'automatic' : '');
                     } else {
-                      handleEquipmentChange(option.key, e.target.checked);
+                      handleEquipmentChange(
+                        feature.filterKey as keyof typeof filters.equipment,
+                        e.target.checked,
+                      );
                     }
                   }}
                   className="filter-sidebar__checkbox"
                   disabled={isLoading}
                 />
                 <div className="filter-sidebar__equipment-content">
-                  <span className="filter-sidebar__equipment-icon">{option.icon}</span>
-                  <span className="filter-sidebar__equipment-label">{option.label}</span>
+                  <span className="filter-sidebar__equipment-icon">{feature.icon}</span>
+                  <span className="filter-sidebar__equipment-label">
+                    {feature.filterKey === 'transmission' ? 'Automatic' : feature.label}
+                  </span>
                 </div>
               </label>
             ))}

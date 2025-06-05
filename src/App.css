@@ -1,12 +1,7 @@
-/* src/App.css */
-
-/* Імпортуємо Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-/* Імпортуємо дизайн систему */
 @import './styles/design-system.css';
 
-/* Reset стилі */
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +24,6 @@ body {
   flex-direction: column;
 }
 
-/* HomePage - ширина 1440px */
 .main-content {
   flex: 1;
   max-width: 1440px;
@@ -37,25 +31,21 @@ body {
   width: 100%;
 }
 
-/* Catalog та Details - ширина 1312px */
 .main-content.catalog {
   max-width: 1312px;
 }
 
-/* Загальні стилі для кнопок */
 button {
   font-family: var(--font-family-primary);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* Загальні стилі для посилань */
 a {
   color: inherit;
   transition: color 0.2s ease;
 }
 
-/* Utilities */
 .text-primary {
   color: var(--color-text-primary);
 }
@@ -80,7 +70,6 @@ a {
   background-color: var(--color-bg-tertiary);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .main-content {
     padding: var(--space-lg);

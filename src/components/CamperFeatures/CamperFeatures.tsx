@@ -1,6 +1,7 @@
 import React from 'react';
 import { Camper } from '../../redux/campers/campersSlice';
 import VehicleDetails from '../VehicleDetails/VehicleDetails';
+import { getAvailableFeatures } from '../../utils/featuresUtils';
 import './CamperFeatures.css';
 
 interface CamperFeaturesProps {
@@ -8,33 +9,8 @@ interface CamperFeaturesProps {
 }
 
 const CamperFeatures: React.FC<CamperFeaturesProps> = ({ camper }) => {
-  const features = [
-    { key: 'transmission' as keyof Camper, icon: '⚙️', label: camper.transmission },
-    { key: 'engine' as keyof Camper, icon: '⛽', label: camper.engine },
-    { key: 'AC' as keyof Camper, icon: '❄️', label: 'AC', condition: camper.AC },
-    { key: 'bathroom' as keyof Camper, icon: '🚿', label: 'Bathroom', condition: camper.bathroom },
-    { key: 'kitchen' as keyof Camper, icon: '🍳', label: 'Kitchen', condition: camper.kitchen },
-    { key: 'TV' as keyof Camper, icon: '📺', label: 'TV', condition: camper.TV },
-    { key: 'radio' as keyof Camper, icon: '📻', label: 'Radio', condition: camper.radio },
-    {
-      key: 'refrigerator' as keyof Camper,
-      icon: '🧊',
-      label: 'Refrigerator',
-      condition: camper.refrigerator,
-    },
-    {
-      key: 'microwave' as keyof Camper,
-      icon: '🔥',
-      label: 'Microwave',
-      condition: camper.microwave,
-    },
-    { key: 'gas' as keyof Camper, icon: '🔥', label: 'Gas', condition: camper.gas },
-    { key: 'water' as keyof Camper, icon: '💧', label: 'Water', condition: camper.water },
-  ];
-
-  const availableFeatures = features.filter(
-    feature => feature.condition !== false && (feature.condition === true || feature.label),
-  );
+  // ✅ Використовуємо єдиний підхід з utils
+  const availableFeatures = getAvailableFeatures(camper);
 
   return (
     <div className="camper-features">
