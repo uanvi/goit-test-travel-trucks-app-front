@@ -88,15 +88,18 @@ const CamperCard: React.FC<CamperCardProps> = ({
 
         {/* Опис */}
         <p className="camper-card__description">
-          {camper.description.length > 100
-            ? `${camper.description.substring(0, 100)}...`
+          {camper.description.length > 60
+            ? `${camper.description.substring(0, 60)}...`
             : camper.description}
         </p>
 
         {/* Особливості */}
         <div className="camper-card__features">
           {displayFeatures.map(feature => (
-            <div key={feature.key} className="camper-card__feature">
+            <div
+              key={feature.key}
+              className="camper-feature_catalog-feature camper-features__feature"
+            >
               <span className="camper-card__feature-icon">{feature.icon}</span>
               <span className="camper-card__feature-label">{feature.label}</span>
             </div>

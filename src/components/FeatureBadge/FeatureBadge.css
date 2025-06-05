@@ -1,0 +1,57 @@
+/* src/components/FeatureBadge/FeatureBadge.css */
+
+.feature-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-large);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  height: 48px;
+  min-width: max-content;
+  font-family: 'Inter', var(--font-family-primary);
+}
+
+/* Варіант для карток каталогу */
+.feature-badge--card {
+  background-color: var(--color-bg-badge);
+}
+
+/* Варіант для деталей кемпера */
+.feature-badge--details {
+  background-color: rgba(242, 244, 247, 1);
+}
+
+.feature-badge__icon {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.feature-badge__label {
+  text-transform: capitalize;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .feature-badge {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+    height: 40px;
+  }
+
+  .feature-badge__icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-badge {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-xs);
+    gap: var(--space-xs);
+    height: 36px;
+  }
+}
