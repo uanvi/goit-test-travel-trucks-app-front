@@ -1,0 +1,67 @@
+.price-display {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Size variants */
+.price-display--small {
+  font-size: var(--font-size-base);
+}
+
+.price-display--medium {
+  font-size: var(--font-size-xl);
+}
+
+.price-display--large {
+  font-size: var(--font-size-2xl);
+}
+
+.price-display--extra-large {
+  font-size: var(--font-size-3xl);
+}
+
+/* Color variants */
+.price-display--primary {
+  color: var(--color-text-primary);
+}
+
+.price-display--accent {
+  color: var(--color-accent-red);
+}
+
+.price-display--secondary {
+  color: var(--color-text-secondary);
+}
+
+/* Currency symbol styling */
+.price-display__currency {
+  margin-right: 2px;
+}
+
+.price-display__amount {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .price-display--large {
+    font-size: var(--font-size-xl);
+  }
+
+  .price-display--extra-large {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .price-display--large {
+    font-size: var(--font-size-lg);
+  }
+
+  .price-display--extra-large {
+    font-size: var(--font-size-xl);
+  }
+}

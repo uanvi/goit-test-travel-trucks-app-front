@@ -1,0 +1,124 @@
+.camper-details-content {
+  display: grid;
+  grid-template-columns: 631px 641px;
+  grid-template-rows: auto 588px;
+  gap: var(--space-4xl);
+  justify-content: flex-start;
+  align-items: start;
+}
+
+.camper-details-content__tabs-nav {
+  display: flex;
+  gap: var(--space-4xl);
+  border-bottom: 1px solid var(--color-border-light);
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.camper-details-content__tab {
+  background: none;
+  border: none;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-tertiary);
+  padding: 0 0 var(--space-2xl) 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  font-family: var(--font-family-primary);
+}
+
+.camper-details-content__tab:hover {
+  color: var(--color-text-primary);
+}
+
+.camper-details-content__tab--active {
+  color: var(--color-text-primary);
+}
+
+.camper-details-content__tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: var(--color-accent-red);
+  border-radius: 2px 2px 0 0;
+}
+
+.camper-details-content__tabs-section {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.camper-details-content__tab-content {
+  width: 631px;
+  height: 588px;
+}
+
+.camper-details-content__booking-section {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .camper-details-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+  }
+
+  .camper-details-content__tab-content {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .camper-details-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .camper-details-content__booking-section {
+    position: static;
+    order: 2;
+  }
+
+  .camper-details-content__tabs-section {
+    order: 1;
+  }
+
+  .camper-details-content__tabs-nav {
+    gap: var(--space-2xl);
+  }
+
+  .camper-details-content__tab {
+    font-size: var(--font-size-lg);
+  }
+
+  .camper-details-content__tab-content {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .camper-details-content__tabs-nav {
+    gap: var(--space-xl);
+  }
+
+  .camper-details-content__tab {
+    font-size: var(--font-size-base);
+    padding-bottom: var(--space-lg);
+  }
+
+  .camper-details-content__tab-content {
+    min-height: 300px;
+  }
+}

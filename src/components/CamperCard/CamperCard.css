@@ -1,5 +1,3 @@
-/* src/components/CamperCard/CamperCard.css */
-
 .camper-card {
   display: flex;
   gap: var(--space-2xl);
@@ -16,7 +14,6 @@
   transform: translateY(-2px);
 }
 
-/* Зображення */
 .camper-card__image {
   flex-shrink: 0;
   width: 292px;
@@ -30,22 +27,22 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block;
+  aspect-ratio: 292 / 312;
 }
 
 .camper-card:hover .camper-card__image img {
   transform: scale(1.02);
 }
 
-/* Контент */
 .camper-card__content {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  min-width: 0; /* Запобігає переповненню flex */
+  min-width: 0;
 }
 
-/* Заголовок та ціна */
 .camper-card__header {
   display: flex;
   justify-content: space-between;
@@ -59,7 +56,7 @@
   align-items: center;
   gap: var(--space-md);
   flex: 1;
-  min-width: 0; /* Запобігає переповненню */
+  min-width: 0;
 }
 
 .camper-card__title {
@@ -69,7 +66,7 @@
   color: var(--color-text-primary);
   margin: 0;
   flex: 1;
-  min-width: 0; /* Запобігає переповненню */
+  min-width: 0;
 }
 
 .camper-card__favorite {
@@ -101,59 +98,10 @@
 }
 
 .camper-card__price {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-  white-space: nowrap;
   margin-left: auto;
   flex-shrink: 0;
 }
 
-/* Рейтинг та локація */
-.camper-card__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-lg);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-primary);
-  flex-shrink: 0;
-}
-
-.camper-card__rating {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.camper-card__star {
-  font-size: var(--font-size-base);
-  color: var(--color-accent-orange);
-}
-
-.camper-card__reviews {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.camper-card__reviews:hover {
-  color: var(--color-text-secondary);
-}
-
-.camper-card__location {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.camper-card__location-icon {
-  font-size: var(--font-size-base);
-}
-
-/* Опис */
 .camper-card__description {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
@@ -162,7 +110,6 @@
   flex-shrink: 0;
 }
 
-/* Особливості */
 .camper-card__features {
   display: flex;
   flex-wrap: wrap;
@@ -174,15 +121,13 @@
   background-color: var(--color-bg-tertiary);
 }
 
-/* Кнопка - фіксований розмір */
 .camper-card__content .main-button {
   margin-top: auto;
   align-self: flex-start;
   flex-shrink: 0;
-  width: 166px; /* Фіксована ширина */
+  width: 166px;
 }
 
-/* Responsive дизайн */
 @media (max-width: 768px) {
   .camper-card {
     flex-direction: column;
@@ -213,12 +158,6 @@
     order: 3;
   }
 
-  .camper-card__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-sm);
-  }
-
   .camper-card__features {
     gap: var(--space-xs);
   }
@@ -238,11 +177,6 @@
   }
 
   .camper-card__title {
-    font-size: var(--font-size-xl);
-    line-height: var(--line-height-normal);
-  }
-
-  .camper-card__price {
     font-size: var(--font-size-xl);
     line-height: var(--line-height-normal);
   }

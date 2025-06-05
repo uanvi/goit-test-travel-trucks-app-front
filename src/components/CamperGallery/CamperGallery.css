@@ -1,5 +1,3 @@
-/* src/components/CamperGallery/CamperGallery.css */
-
 .camper-gallery {
   display: grid;
   grid-template-columns: repeat(4, 292px);
@@ -15,6 +13,7 @@
   overflow: hidden;
   transition: transform 0.3s ease;
   cursor: pointer;
+  aspect-ratio: 292 / 312;
 }
 
 .camper-gallery__item:hover {
@@ -26,13 +25,13 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block;
 }
 
 .camper-gallery__item:hover .camper-gallery__image {
   transform: scale(1.05);
 }
 
-/* Responsive design */
 @media (max-width: 1024px) {
   .camper-gallery {
     grid-template-columns: repeat(3, 292px);
@@ -49,6 +48,7 @@
   .camper-gallery__item {
     width: 100%;
     height: 200px;
+    aspect-ratio: 3 / 2;
   }
 }
 
@@ -61,5 +61,6 @@
   .camper-gallery__item {
     width: 100%;
     height: 180px;
+    aspect-ratio: 16 / 9;
   }
 }

@@ -41,7 +41,6 @@ export const TEXTS = {
   },
   camper: {
     rating: 'Rating',
-    pricePrefix: '€',
     tabs: {
       features: 'Features',
       reviews: 'Reviews',
@@ -58,6 +57,5 @@ export const TEXTS = {
   },
   camperDetails: {
     reviews: '({count} Reviews)',
-    price: '€{price}',
   },
 };

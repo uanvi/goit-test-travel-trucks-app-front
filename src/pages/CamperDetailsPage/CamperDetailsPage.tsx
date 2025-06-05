@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,17 +7,16 @@ import {
 } from '../../redux/camperDetails/camperDetailsSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 import ErrorBlock from '../../components/ErrorBlock';
-import { TEXTS } from '../../config/textsConfig';
-import CamperFeatures from '../../components/CamperFeatures/CamperFeatures';
-import CamperReviews from '../../components/CamperReviews/CamperReviews';
+import CamperMeta from '../../components/CamperMeta/CamperMeta';
+import PriceDisplay from '../../components/PriceDisplay/PriceDisplay';
 import CamperGallery from '../../components/CamperGallery/CamperGallery';
-import BookingForm from '../../components/BookingForm/BookingForm';
+import CamperDetailsContent from '../../components/CamperDetailsContent/CamperDetailsContent';
+import { TEXTS } from '../../config/textsConfig';
 import './CamperDetailsPage.css';
 
 const CamperDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const [activeTab, setActiveTab] = useState<'features' | 'reviews'>('features');
 
   const { camper, loading, error } = useSelector((state: RootState) => state.camperDetails);
 
@@ -33,6 +32,22 @@ const CamperDetailsPage: React.FC = () => {
       dispatch(clearCamperDetails());
     };
   }, [dispatch]);
+
+  // Preload першого зображення негайно після завантаження даних
+  useEffect(() => {
+    if (camper?.gallery?.[0]?.thumb) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = camper.gallery[0].thumb;
+      link.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(link);
+
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, [camper?.gallery]);
 
   const handleRetry = () => {
     if (id) {
@@ -74,21 +89,11 @@ const CamperDetailsPage: React.FC = () => {
         <h1 className="camper-details__title">{camper.name}</h1>
 
         <div className="camper-details__meta">
-          <div className="camper-details__rating">
-            <span className="camper-details__star">⭐</span>
-            <span>{camper.rating}</span>
-            <span className="camper-details__reviews">
-              {TEXTS.camperDetails.reviews.replace('{count}', camper.reviews.length.toString())}
-            </span>
-          </div>
-          <div className="camper-details__location">
-            <span>📍</span>
-            <span>{camper.location}</span>
-          </div>
+          <CamperMeta camper={camper} />
         </div>
 
         <div className="camper-details__price">
-          {TEXTS.camperDetails.price.replace('{price}', camper.price.toString())}
+          <PriceDisplay amount={camper.price} size="extra-large" />
         </div>
       </div>
 
@@ -98,38 +103,7 @@ const CamperDetailsPage: React.FC = () => {
 
       <p className="camper-details__description">{camper.description}</p>
 
-      <div className="camper-details__content">
-        <div className="camper-details__tabs-nav">
-          <button
-            className={`camper-details__tab ${
-              activeTab === 'features' ? 'camper-details__tab--active' : ''
-            }`}
-            onClick={() => setActiveTab('features')}
-          >
-            {TEXTS.camper.tabs.features}
-          </button>
-
-          <button
-            className={`camper-details__tab ${
-              activeTab === 'reviews' ? 'camper-details__tab--active' : ''
-            }`}
-            onClick={() => setActiveTab('reviews')}
-          >
-            {TEXTS.camper.tabs.reviews}
-          </button>
-        </div>
-
-        <div className="camper-details__tabs-section">
-          <div className="camper-details__tab-content">
-            {activeTab === 'features' && <CamperFeatures camper={camper} />}
-            {activeTab === 'reviews' && <CamperReviews camper={camper} />}
-          </div>
-        </div>
-
-        <div className="camper-details__booking-section">
-          <BookingForm camperName={camper.name} />
-        </div>
-      </div>
+      <CamperDetailsContent camper={camper} />
     </section>
   );
 };

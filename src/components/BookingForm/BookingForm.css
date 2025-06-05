@@ -69,8 +69,10 @@
 }
 
 .booking-form__textarea {
-  resize: vertical;
-  min-height: 120px;
+  resize: none;
+  min-height: 118px;
+  height: 118px;
+  max-height: 120px;
 }
 
 .booking-form__submit {
