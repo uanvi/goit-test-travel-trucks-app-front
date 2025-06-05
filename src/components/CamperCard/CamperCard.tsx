@@ -2,6 +2,8 @@ import React from 'react';
 import { Camper } from '../../redux/campers/campersSlice';
 import MainButton from '../MainButton/MainButton';
 import Icon from '../Icon/Icon';
+import CamperMeta from '../CamperMeta/CamperMeta';
+import PriceDisplay from '../PriceDisplay/PriceDisplay';
 import { getDisplayFeatures, getAvailableFeatures } from '../../utils/featuresUtils';
 import './CamperCard.css';
 
@@ -36,6 +38,9 @@ const CamperCard: React.FC<CamperCardProps> = ({
           src={camper.gallery[0]?.thumb || '/placeholder-camper.jpg'}
           alt={camper.name}
           loading="lazy"
+          fetchPriority="low"
+          width="292"
+          height="312"
         />
       </div>
 
@@ -45,7 +50,7 @@ const CamperCard: React.FC<CamperCardProps> = ({
         <div className="camper-card__header">
           <div className="camper-card__title-section">
             <h3 className="camper-card__title">{camper.name}</h3>
-            <div className="camper-card__price">€{camper.price}</div>
+            <PriceDisplay amount={camper.price} size="large" className="camper-card__price" />
             <button
               className={`camper-card__favorite ${
                 isFavorite ? 'camper-card__favorite--active' : ''
@@ -59,17 +64,7 @@ const CamperCard: React.FC<CamperCardProps> = ({
         </div>
 
         {/* Рейтинг та локація */}
-        <div className="camper-card__meta">
-          <div className="camper-card__rating">
-            <span className="camper-card__star">⭐</span>
-            <span>{camper.rating}</span>
-            <span className="camper-card__reviews">({camper.reviews.length} Reviews)</span>
-          </div>
-          <div className="camper-card__location">
-            <span className="camper-card__location-icon">📍</span>
-            <span>{camper.location}</span>
-          </div>
-        </div>
+        <CamperMeta camper={camper} />
 
         {/* Опис */}
         <p className="camper-card__description">

@@ -79,11 +79,11 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
           <input
             type="date"
             name="bookingDate"
-            placeholder="Booking date*"
             value={formData.bookingDate}
             onChange={handleChange}
             required
             className="booking-form__input"
+            data-placeholder="Booking date*"
           />
         </div>
 
@@ -93,8 +93,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
             placeholder="Comment"
             value={formData.comment}
             onChange={handleChange}
-            rows={4}
+            rows={5}
             className="booking-form__textarea"
+            style={{ resize: 'none' }}
           />
         </div>
 

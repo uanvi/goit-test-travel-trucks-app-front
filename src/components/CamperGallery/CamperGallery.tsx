@@ -15,7 +15,10 @@ const CamperGallery: React.FC<CamperGalleryProps> = ({ camper }) => {
             src={img.thumb}
             alt={`${camper.name} ${i + 1}`}
             className="camper-gallery__image"
-            loading="lazy"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchPriority={i === 0 ? 'high' : 'low'}
+            width="292"
+            height="312"
           />
         </div>
       ))}
