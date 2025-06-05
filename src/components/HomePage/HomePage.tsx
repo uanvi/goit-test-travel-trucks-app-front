@@ -1,5 +1,6 @@
+// src/components/HomePage/HomePage.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import MainButton from '../MainButton/MainButton';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -9,9 +10,9 @@ const HomePage: React.FC = () => {
         <div className="hero-content">
           <h1 className="hero-title">Campers of your dreams</h1>
           <p className="hero-subtitle">You can find everything you want in our catalog</p>
-          <Link to="/catalog" className="hero-button">
+          <MainButton href="/catalog" size="wide">
             View Now
-          </Link>
+          </MainButton>
         </div>
       </section>
     </div>

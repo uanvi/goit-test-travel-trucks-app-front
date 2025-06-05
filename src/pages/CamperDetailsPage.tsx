@@ -94,7 +94,7 @@ const CamperDetailsPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="camper-details__price">€{camper.price.toFixed(2)}</div>
+        <div className="camper-details__price">€{camper.price}</div>
       </div>
 
       {/* Gallery */}

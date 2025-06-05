@@ -1,4 +1,6 @@
+// src/components/BookingForm/BookingForm.tsx
 import React, { useState } from 'react';
+import MainButton from '../MainButton/MainButton';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -96,9 +98,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
           />
         </div>
 
-        <button type="submit" className="booking-form__submit">
+        <MainButton type="submit" size="default" className="main-button--full-width">
           Send
-        </button>
+        </MainButton>
       </form>
     </div>
   );

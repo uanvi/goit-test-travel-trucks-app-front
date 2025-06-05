@@ -1,0 +1,105 @@
+/* src/components/MainButton/MainButton.css */
+
+.main-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  border-radius: var(--radius-large);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  height: 56px;
+  min-width: 166px;
+  font-family: var(--font-family-primary);
+  box-sizing: border-box;
+}
+
+/* Primary variant (red background, white text) */
+.main-button--primary {
+  background-color: var(--color-button-primary);
+  color: white;
+}
+
+.main-button--primary:hover:not(:disabled) {
+  background-color: var(--color-button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+.main-button--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(228, 72, 72, 0.2);
+}
+
+/* Secondary variant (white background, black text) */
+.main-button--secondary {
+  background: var(--color-button-secondary);
+  border: 1px solid var(--color-button-secondary-border);
+  color: var(--color-text-primary);
+  padding: var(--space-lg) var(--space-3xl);
+}
+
+.main-button--secondary:hover:not(:disabled) {
+  background-color: var(--color-button-secondary-hover);
+  border-color: var(--color-border-medium);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.main-button--secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+}
+
+/* Size variants */
+.main-button--default {
+  min-width: 166px;
+}
+
+.main-button--wide {
+  min-width: 173px;
+}
+
+/* Disabled state */
+.main-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Full width modifier */
+.main-button--full-width {
+  margin: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-button {
+    height: 48px;
+    padding: var(--space-md) var(--space-2xl);
+    font-size: var(--font-size-sm);
+    min-width: 140px;
+  }
+
+  .main-button--secondary {
+    padding: var(--space-md) var(--space-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .main-button {
+    height: 44px;
+    padding: var(--space-sm) var(--space-xl);
+    font-size: var(--font-size-sm);
+    min-width: 120px;
+  }
+
+  .main-button--secondary {
+    padding: var(--space-sm) var(--space-lg);
+  }
+}
