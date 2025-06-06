@@ -6,11 +6,11 @@ import {
   clearCamperDetails,
 } from '../../redux/camperDetails/camperDetailsSlice';
 import { AppDispatch, RootState } from '../../redux/store';
-import ErrorBlock from '../../components/ErrorBlock';
-import CamperMeta from '../../components/CamperMeta/CamperMeta';
-import PriceDisplay from '../../components/PriceDisplay/PriceDisplay';
-import CamperGallery from '../../components/CamperGallery/CamperGallery';
-import CamperDetailsContent from '../../components/CamperDetailsContent/CamperDetailsContent';
+import ErrorBlock from '../../components/common/ErrorBlock/ErrorBlock';
+import CamperMeta from '../../components/camper/CamperMeta/CamperMeta';
+import PriceDisplay from '../../components/common/PriceDisplay/PriceDisplay';
+import CamperGallery from '../../components/camper/CamperGallery/CamperGallery';
+import CamperDetailsContent from '../../components/camper/CamperDetailsContent/CamperDetailsContent';
 import { TEXTS } from '../../config/textsConfig';
 import './CamperDetailsPage.css';
 

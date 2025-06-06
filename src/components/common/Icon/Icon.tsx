@@ -1,5 +1,5 @@
 import React from 'react';
-import { FEATURES_CONFIG, VEHICLE_TYPES_CONFIG } from '../../config/featuresConfig';
+import { FEATURES_CONFIG, VEHICLE_TYPES_CONFIG } from '../../../config/featuresConfig';
 import './Icon.css';
 
 // Only icons from main configs

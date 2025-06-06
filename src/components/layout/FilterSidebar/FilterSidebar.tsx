@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import LocationAutocomplete from '../LocationAutocomplete/LocationAutocomplete';
-import MainButton from '../MainButton/MainButton';
-import Icon from '../Icon/Icon';
-import { getFilterableFeatures, getVehicleTypes } from '../../utils/featuresUtils';
+import LocationAutocomplete from '../../forms/LocationAutocomplete/LocationAutocomplete';
+import MainButton from '../../common/MainButton/MainButton';
+import Icon from '../../common/Icon/Icon';
+import { getFilterableFeatures, getVehicleTypes } from '../../../utils/featuresUtils';
 import './FilterSidebar.css';
 
 export interface FilterParams {
@@ -108,30 +108,27 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
           <div className="filter-sidebar__divider"></div>
 
           <div className="filter-sidebar__equipment-grid">
-            {filterableFeatures.map(feature => (
-              <label key={feature.filterKey} className="filter-sidebar__equipment-item">
-                <input
-                  type="checkbox"
-                  checked={!!(filters.equipment as any)[feature.filterKey!]}
-                  onChange={e => {
-                    handleEquipmentChange(
-                      feature.filterKey as keyof typeof filters.equipment,
-                      e.target.checked,
-                    );
-                  }}
-                  className="filter-sidebar__checkbox"
-                  disabled={isLoading}
-                />
-                <div className="filter-sidebar__equipment-content">
-                  <Icon
-                    name={feature.key.toLowerCase() as any}
-                    size="medium"
-                    className="filter-sidebar__equipment-icon"
+            {filterableFeatures.map(({ filterKey, key, label }) =>
+              filterKey ? (
+                <label key={filterKey} className="filter-sidebar__equipment-item">
+                  <input
+                    type="checkbox"
+                    checked={filters.equipment[filterKey]}
+                    onChange={e => handleEquipmentChange(filterKey, e.target.checked)}
+                    className="filter-sidebar__checkbox"
+                    disabled={isLoading}
                   />
-                  <span className="filter-sidebar__equipment-label">{feature.label}</span>
-                </div>
-              </label>
-            ))}
+                  <div className="filter-sidebar__equipment-content">
+                    <Icon
+                      name={key.toLowerCase() as any}
+                      size="medium"
+                      className="filter-sidebar__equipment-icon"
+                    />
+                    <span className="filter-sidebar__equipment-label">{label}</span>
+                  </div>
+                </label>
+              ) : null,
+            )}
           </div>
         </div>
 

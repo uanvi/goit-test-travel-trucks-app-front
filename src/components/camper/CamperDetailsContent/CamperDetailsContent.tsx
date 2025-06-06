@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
-import { TEXTS } from '../../config/textsConfig';
+import { Camper } from '../../../redux/campers/campersSlice';
+import { TEXTS } from '../../../config/textsConfig';
 import CamperFeatures from '../CamperFeatures/CamperFeatures';
 import CamperReviews from '../CamperReviews/CamperReviews';
-import BookingForm from '../BookingForm/BookingForm';
+import BookingForm from '../../forms/BookingForm/BookingForm';
 import './CamperDetailsContent.css';
 
 interface CamperDetailsContentProps {

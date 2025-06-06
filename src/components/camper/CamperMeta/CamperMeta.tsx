@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
+import { Camper } from '../../../redux/campers/campersSlice';
 import './CamperMeta.css';
 
 interface CamperMetaProps {

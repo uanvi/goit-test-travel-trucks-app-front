@@ -1,6 +1,6 @@
 import React from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
-import { TEXTS } from '../../config/textsConfig';
+import { Camper } from '../../../redux/campers/campersSlice';
+import { TEXTS } from '../../../config/textsConfig';
 import './VehicleDetails.css';
 
 interface VehicleDetailsProps {

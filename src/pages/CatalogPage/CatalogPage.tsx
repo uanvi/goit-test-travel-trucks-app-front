@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCampers, applyFilters, loadMoreWithFilters } from '../../redux/campers/campersSlice';
 import { AppDispatch, RootState } from '../../redux/store';
-import ErrorBlock from '../../components/ErrorBlock';
-import CamperCard from '../../components/CamperCard/CamperCard';
-import FilterSidebar, { FilterParams } from '../../components/FilterSidebar/FilterSidebar';
-import MainButton from '../../components/MainButton/MainButton';
+import ErrorBlock from '../../components/common/ErrorBlock/ErrorBlock';
+import CamperCard from '../../components/camper/CamperCard/CamperCard';
+import FilterSidebar, { FilterParams } from '../../components/layout/FilterSidebar/FilterSidebar';
+import MainButton from '../../components/common/MainButton/MainButton';
 import { TEXTS } from '../../config/textsConfig';
 import './CatalogPage.css';
 

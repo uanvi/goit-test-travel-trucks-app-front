@@ -1,10 +1,10 @@
 import React, { memo, useCallback } from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
-import MainButton from '../MainButton/MainButton';
+import { Camper } from '../../../redux/campers/campersSlice';
+import MainButton from '../../common/MainButton/MainButton';
 import CamperMeta from '../CamperMeta/CamperMeta';
-import PriceDisplay from '../PriceDisplay/PriceDisplay';
+import PriceDisplay from '../../common/PriceDisplay/PriceDisplay';
 import FeaturesList from '../FeaturesList/FeaturesList';
-import { getAvailableFeatures } from '../../utils/featuresUtils';
+import { getAvailableFeatures } from '../../../utils/featuresUtils';
 import './CamperCard.css';
 
 interface CamperCardProps {

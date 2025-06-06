@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../config/apiConfig';
-import { FilterParams } from '../components/FilterSidebar/FilterSidebar';
+import { FilterParams } from '../components/layout/FilterSidebar/FilterSidebar';
 
 export interface CampersApiParams {
   page: number;
