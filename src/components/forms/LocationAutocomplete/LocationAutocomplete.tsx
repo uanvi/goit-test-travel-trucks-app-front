@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getUniqueLocations } from '../../../api/campersApi';
-import UIIcon from '../../common/UIIcon/UIIcon';
 import './LocationAutocomplete.css';
 
 interface LocationAutocompleteProps {
