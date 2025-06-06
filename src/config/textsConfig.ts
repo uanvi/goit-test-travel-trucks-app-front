@@ -13,6 +13,11 @@ export const TEXTS = {
     featuresTab: 'Features',
     reviewsTab: 'Reviews',
     viewNow: 'View Now',
+    showMore: 'Show more',
+    search: 'Search',
+    searching: 'Searching...',
+    resetFilters: 'Reset filters',
+    send: 'Send',
   },
   loading: {
     initial: 'Loading campers...',
@@ -23,6 +28,12 @@ export const TEXTS = {
       title: 'Campers of your dreams',
       subtitle: 'You can find everything you want in our catalog',
     },
+  },
+  header: {
+    logoMain: 'Travel',
+    logoSecondary: 'Trucks',
+    home: 'Home',
+    catalog: 'Catalog',
   },
   catalog: {
     title: 'Camper Catalog',
@@ -38,6 +49,25 @@ export const TEXTS = {
     form: '🚐 {form}',
     equipment: '✓ {equipment}',
     transmission: '⚙️ {transmission}',
+  },
+  filterSidebar: {
+    locationLabel: 'Location',
+    filtersTitle: 'Filters',
+    vehicleEquipment: 'Vehicle equipment',
+    vehicleType: 'Vehicle type',
+    locationPlaceholder: 'City, Country',
+  },
+  bookingForm: {
+    title: 'Book your campervan now',
+    subtitle: 'Stay connected! We are always ready to help you.',
+    namePlaceholder: 'Name*',
+    emailPlaceholder: 'Email*',
+    datePlaceholder: 'Booking date*',
+    commentPlaceholder: 'Comment',
+  },
+  camperCard: {
+    addToFavorites: 'Add to favorites',
+    removeFromFavorites: 'Remove from favorites',
   },
   camper: {
     rating: 'Rating',
@@ -57,5 +87,10 @@ export const TEXTS = {
   },
   camperDetails: {
     reviews: '({count} Reviews)',
+  },
+  symbols: {
+    heartFilled: '❤️',
+    heartEmpty: '🤍',
+    star: '⭐',
   },
 };

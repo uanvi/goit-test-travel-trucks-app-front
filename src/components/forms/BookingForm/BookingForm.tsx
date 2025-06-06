@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MainButton from '../../common/MainButton/MainButton';
+import { TEXTS } from '../../../config/textsConfig';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -44,15 +45,15 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
 
   return (
     <div className="booking-form">
-      <h3 className="booking-form__title">Book your campervan now</h3>
-      <p className="booking-form__subtitle">Stay connected! We are always ready to help you.</p>
+      <h3 className="booking-form__title">{TEXTS.bookingForm.title}</h3>
+      <p className="booking-form__subtitle">{TEXTS.bookingForm.subtitle}</p>
 
       <form onSubmit={handleSubmit} className="booking-form__form">
         <div className="booking-form__field">
           <input
             type="text"
             name="name"
-            placeholder="Name*"
+            placeholder={TEXTS.bookingForm.namePlaceholder}
             value={formData.name}
             onChange={handleChange}
             required
@@ -64,7 +65,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
           <input
             type="email"
             name="email"
-            placeholder="Email*"
+            placeholder={TEXTS.bookingForm.emailPlaceholder}
             value={formData.email}
             onChange={handleChange}
             required
@@ -80,14 +81,14 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
             onChange={handleChange}
             required
             className="booking-form__input"
-            data-placeholder="Booking date*"
+            data-placeholder={TEXTS.bookingForm.datePlaceholder}
           />
         </div>
 
         <div className="booking-form__field">
           <textarea
             name="comment"
-            placeholder="Comment"
+            placeholder={TEXTS.bookingForm.commentPlaceholder}
             value={formData.comment}
             onChange={handleChange}
             rows={5}
@@ -97,7 +98,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ camperName }) => {
         </div>
 
         <MainButton type="submit" size="default" className="main-button--full-width">
-          Send
+          {TEXTS.buttons.send}
         </MainButton>
       </form>
     </div>

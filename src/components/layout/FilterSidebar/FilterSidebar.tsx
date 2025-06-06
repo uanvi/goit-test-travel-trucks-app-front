@@ -3,12 +3,14 @@ import LocationAutocomplete from '../../forms/LocationAutocomplete/LocationAutoc
 import MainButton from '../../common/MainButton/MainButton';
 import Icon from '../../common/Icon/Icon';
 import { getFilterableFeatures, getVehicleTypes } from '../../../utils/featuresUtils';
+import { TEXTS } from '../../../config/textsConfig';
 import './FilterSidebar.css';
 
 export interface FilterParams {
   location: string;
   form: string;
   equipment: {
+    [key: string]: boolean;
     AC: boolean;
     kitchen: boolean;
     TV: boolean;
@@ -65,7 +67,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
   );
 
   const handleEquipmentChange = useCallback(
-    (key: keyof typeof filters.equipment, value: boolean) => {
+    (key: string, value: boolean) => {
       const newFilters = {
         ...filters,
         equipment: { ...filters.equipment, [key]: value },
@@ -92,19 +94,19 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
     <aside className="filter-sidebar">
       <form onSubmit={handleSubmit} className="filter-sidebar__form">
         <div className="filter-sidebar__section">
-          <label className="filter-sidebar__label">Location</label>
+          <label className="filter-sidebar__label">{TEXTS.filterSidebar.locationLabel}</label>
           <LocationAutocomplete
             value={filters.location}
             onChange={handleLocationChange}
-            placeholder="City, Country"
+            placeholder={TEXTS.filterSidebar.locationPlaceholder}
             disabled={isLoading}
           />
         </div>
 
-        <h3 className="filter-sidebar__title">Filters</h3>
+        <h3 className="filter-sidebar__title">{TEXTS.filterSidebar.filtersTitle}</h3>
 
         <div className="filter-sidebar__section">
-          <h4 className="filter-sidebar__subtitle">Vehicle equipment</h4>
+          <h4 className="filter-sidebar__subtitle">{TEXTS.filterSidebar.vehicleEquipment}</h4>
           <div className="filter-sidebar__divider"></div>
 
           <div className="filter-sidebar__equipment-grid">
@@ -133,7 +135,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
         </div>
 
         <div className="filter-sidebar__section">
-          <h4 className="filter-sidebar__subtitle">Vehicle type</h4>
+          <h4 className="filter-sidebar__subtitle">{TEXTS.filterSidebar.vehicleType}</h4>
           <div className="filter-sidebar__divider"></div>
 
           <div className="filter-sidebar__vehicle-grid">
@@ -163,11 +165,11 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
 
         <div className="filter-sidebar__actions">
           <MainButton type="submit" size="default" disabled={isLoading}>
-            {isLoading ? 'Searching...' : 'Search'}
+            {isLoading ? TEXTS.buttons.searching : TEXTS.buttons.search}
           </MainButton>
 
           <MainButton variant="secondary" size="default" onClick={handleReset} disabled={isLoading}>
-            Reset filters
+            {TEXTS.buttons.resetFilters}
           </MainButton>
         </div>
       </form>
