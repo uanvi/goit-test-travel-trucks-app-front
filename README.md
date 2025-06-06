@@ -4,7 +4,7 @@ A modern, responsive frontend application for browsing and booking campers, buil
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://vercel.com)
+[View Live Demo](https://goit-test-travel-trucks-app-front.vercel.app/)
 
 ---
 
@@ -54,31 +54,23 @@ A modern, responsive frontend application for browsing and booking campers, buil
 
 ```
 src/
-├── 📁 api/                    # API layer
-│   └── campersApi.ts          # Axios services
-├── 📁 components/             # Reusable UI components
-│   ├── BookingForm/           # Booking form with validation
-│   ├── CamperCard/            # Catalog item component
-│   ├── FilterSidebar/         # Advanced filtering
-│   ├── Header/                # Navigation header
-│   ├── Icon/                  # SVG icon system
-│   └── MainButton/            # Primary CTA button
-├── 📁 config/                 # Configuration files
-│   ├── apiConfig.ts           # API endpoints & settings
-│   ├── featuresConfig.ts      # Feature definitions
-│   └── textsConfig.ts         # Centralized text content
-├── 📁 pages/                  # Route components
-│   ├── HomePage/              # Landing page
-│   ├── CatalogPage/           # Camper listing
-│   └── CamperDetailsPage/     # Individual camper
-├── 📁 redux/                  # State management
-│   ├── campers/               # Catalog state & actions
-│   ├── camperDetails/         # Detail page state
-│   └── store.ts               # Redux store configuration
-├── 📁 styles/                 # Global styles
-│   └── design-system.css      # CSS custom properties
-└── 📁 utils/                  # Helper functions
-    └── featuresUtils.ts       # Feature mapping logic
+├── api/                          # API layer
+├── assets/                      # Static assets
+│   └── icons/                   # SVG icons
+├── components/                  # Reusable components
+│   ├── camper/                 # Camper-specific components
+│   ├── common/                 # Common UI components
+│   ├── forms/                  # Form components
+│   └── layout/                 # Layout components
+├── config/                     # Configuration files
+├── pages/                     # Page components
+├── redux/                     # State management
+├── styles/                    # Global styles
+└── utils/                     # Utility functions
+
+public/
+├── icons/                    # Public icon assets
+└── images/                   # Public image assets
 ```
 
 ### State Management
@@ -89,15 +81,6 @@ src/
 - **Error Boundary** integration
 
 ---
-
-## 📱 Responsive Design (Draft)
-
-### Breakpoints
-
-- **Mobile**: 320px - 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1024px+
-- **Large Desktop**: 1440px+
 
 ## 🔄 API Integration
 
@@ -121,18 +104,16 @@ GET /campers/:id          # Individual camper details
 - Finalize Icons module implementation
 - Improve form validation and UX
 
-## 📈 Future Enhancements
+## Getting Started
 
-### High Priority
+**Prerequisites**: Node.js 16+ and npm/yarn
 
-- [ ] **Unit & Integration Tests** - Jest + React Testing Library
-- [ ] **Advanced Image Gallery** - Lightbox with zoom
+```bash
+# Clone and install
+git clone <repository-url>
+cd travel-trucks
+npm install
 
-### Medium Priority
-
-- [ ] **Reviews System** - User-generated reviews
-- [ ] **Map Integration** - Camper locations on map
-
-### Low Priority
-
-- [ ] **Internationalization** - Multi-language support
+# Start development server
+npm run dev
+```
