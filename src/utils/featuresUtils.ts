@@ -25,13 +25,16 @@ const typedFeaturesConfig = FEATURES_CONFIG as readonly FeatureConfig[];
 const typedVehicleTypesConfig = VEHICLE_TYPES_CONFIG as readonly VehicleTypeConfig[];
 
 export const getFeatureConfig = (camper: Camper): Feature[] => {
-  return typedFeaturesConfig.map(feature => ({
-    key: feature.key,
-    icon: feature.icon,
-    label:
-      typeof camper[feature.key] === 'string' ? (camper[feature.key] as string) : feature.label,
-    condition: Boolean(camper[feature.key]),
-  }));
+  return typedFeaturesConfig.map(feature => {
+    const camperValue = camper[feature.key];
+
+    return {
+      key: feature.key,
+      icon: feature.icon,
+      label: typeof camperValue === 'string' ? camperValue : feature.label,
+      condition: Boolean(camperValue),
+    };
+  });
 };
 
 export const getAvailableFeatures = (camper: Camper): Feature[] => {

@@ -4,7 +4,9 @@ import MainButton from '../../common/MainButton/MainButton';
 import CamperMeta from '../CamperMeta/CamperMeta';
 import PriceDisplay from '../../common/PriceDisplay/PriceDisplay';
 import FeaturesList from '../FeaturesList/FeaturesList';
+import Icon from '../../common/Icon/Icon';
 import { getAvailableFeatures } from '../../../utils/featuresUtils';
+import { TEXTS } from '../../../config/textsConfig';
 import './CamperCard.css';
 
 interface CamperCardProps {
@@ -35,7 +37,7 @@ const CamperCard: React.FC<CamperCardProps> = memo(
       <div className="camper-card">
         <div className="camper-card__image">
           <img
-            src={camper.gallery[0]?.thumb || '/placeholder-camper.jpg'}
+            src={camper.gallery?.[0]?.thumb || '/placeholder-camper.jpg'}
             alt={camper.name}
             loading="lazy"
             fetchPriority="low"
@@ -54,9 +56,15 @@ const CamperCard: React.FC<CamperCardProps> = memo(
                   isFavorite ? 'camper-card__favorite--active' : ''
                 }`}
                 onClick={handleFavoriteClick}
-                aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                aria-label={
+                  isFavorite
+                    ? TEXTS.camperCard.removeFromFavorites
+                    : TEXTS.camperCard.addToFavorites
+                }
               >
-                <span className="camper-card__heart">{isFavorite ? '❤️' : '🤍'}</span>
+                <span className="camper-card__heart">
+                  {isFavorite ? TEXTS.symbols.heartFilled : TEXTS.symbols.heartEmpty}
+                </span>
               </button>
             </div>
           </div>
@@ -73,7 +81,7 @@ const CamperCard: React.FC<CamperCardProps> = memo(
           />
 
           <MainButton href={`/catalog/${camper.id}`} size="default">
-            Show more
+            {TEXTS.buttons.showMore}
           </MainButton>
         </div>
       </div>

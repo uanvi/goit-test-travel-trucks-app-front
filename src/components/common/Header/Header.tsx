@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { TEXTS } from '../../../config/textsConfig';
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -17,22 +18,20 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header-container">
-        {/* Logo */}
         <Link to="/" className="header-logo">
-          <span className="logo-primary">Travel</span>
-          <span className="logo-secondary">Trucks</span>
+          <span className="logo-primary">{TEXTS.header.logoMain}</span>
+          <span className="logo-secondary">{TEXTS.header.logoSecondary}</span>
         </Link>
 
-        {/* Navigation */}
         <nav className="header-nav">
           <Link to="/" className={`nav-link ${isActive('/') ? 'nav-link--active' : ''}`}>
-            Home
+            {TEXTS.header.home}
           </Link>
           <Link
             to="/catalog"
             className={`nav-link ${isActive('/catalog') ? 'nav-link--active' : ''}`}
           >
-            Catalog
+            {TEXTS.header.catalog}
           </Link>
         </nav>
       </div>

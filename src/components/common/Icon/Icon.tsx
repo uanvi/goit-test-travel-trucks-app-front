@@ -2,15 +2,11 @@ import React from 'react';
 import { FEATURES_CONFIG, VEHICLE_TYPES_CONFIG } from '../../../config/featuresConfig';
 import './Icon.css';
 
-// Only icons from main configs
 const ALL_ICONS = {
-  // Features icons
   ...Object.fromEntries(FEATURES_CONFIG.map(feature => [feature.key.toLowerCase(), feature.icon])),
-  // Vehicle types icons
   ...Object.fromEntries(VEHICLE_TYPES_CONFIG.map(vehicle => [vehicle.value, vehicle.icon])),
 } as const;
 
-// Auto-generated type
 export type IconName = keyof typeof ALL_ICONS;
 
 interface IconProps {
@@ -31,4 +27,3 @@ const Icon: React.FC<IconProps> = ({ name, size = 'medium', className = '' }) =>
 };
 
 export default Icon;
-export type { IconName };

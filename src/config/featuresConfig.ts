@@ -1,65 +1,65 @@
 export const FEATURES_CONFIG = [
   {
     key: 'transmission',
-    icon: '/src/assets/icons/transmission.svg',
+    icon: '/icons/transmission.svg',
     label: 'transmission',
   },
   {
     key: 'engine',
-    icon: '/src/assets/icons/engine.svg',
+    icon: '/icons/engine.svg',
     label: 'engine',
   },
   {
     key: 'AC',
-    icon: '/src/assets/icons/ac.svg',
+    icon: '/icons/ac.svg',
     label: 'AC',
     filterKey: 'AC', // This IS a filter
   },
   {
     key: 'bathroom',
-    icon: '/src/assets/icons/bathroom.svg',
+    icon: '/icons/bathroom.svg',
     label: 'Bathroom',
     filterKey: 'bathroom', // This IS a filter
   },
   {
     key: 'kitchen',
-    icon: '/src/assets/icons/kitchen.svg',
+    icon: '/icons/kitchen.svg',
     label: 'Kitchen',
     filterKey: 'kitchen', // This IS a filter
   },
   {
     key: 'TV',
-    icon: '/src/assets/icons/tv.svg',
+    icon: '/icons/tv.svg',
     label: 'TV',
     filterKey: 'TV', // This IS a filter
   },
   {
     key: 'radio',
-    icon: '/src/assets/icons/radio.svg',
+    icon: '/icons/radio.svg',
     label: 'Radio',
     filterKey: 'radio', // This IS a filter
   },
   {
     key: 'refrigerator',
-    icon: '/src/assets/icons/refrigerator.svg',
+    icon: '/icons/refrigerator.svg',
     label: 'Refrigerator',
     filterKey: 'refrigerator', // This IS a filter
   },
   {
     key: 'microwave',
-    icon: '/src/assets/icons/microwave.svg',
+    icon: '/icons/microwave.svg',
     label: 'Microwave',
     filterKey: 'microwave', // This IS a filter
   },
   {
     key: 'gas',
-    icon: '/src/assets/icons/gas.svg',
+    icon: '/icons/gas.svg',
     label: 'Gas',
     filterKey: 'gas', // This IS a filter
   },
   {
     key: 'water',
-    icon: '/src/assets/icons/water.svg',
+    icon: '/icons/water.svg',
     label: 'Water',
     filterKey: 'water', // This IS a filter
   },
@@ -69,16 +69,16 @@ export const VEHICLE_TYPES_CONFIG = [
   {
     value: 'panelTruck',
     label: 'Van',
-    icon: '/src/assets/icons/van.svg',
+    icon: '/icons/van.svg',
   },
   {
     value: 'fullyIntegrated',
     label: 'Fully Integrated',
-    icon: '/src/assets/icons/motorhome.svg',
+    icon: '/icons/motorhome.svg',
   },
   {
     value: 'alcove',
     label: 'Alcove',
-    icon: '/src/assets/icons/alcove.svg',
+    icon: '/icons/alcove.svg',
   },
 ] as const;
