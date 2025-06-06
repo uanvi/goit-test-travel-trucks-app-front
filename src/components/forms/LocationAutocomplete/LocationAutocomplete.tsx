@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getUniqueLocations } from '../../../api/campersApi';
+import UIIcon from '../../common/UIIcon/UIIcon';
 import './LocationAutocomplete.css';
 
 interface LocationAutocompleteProps {
@@ -23,17 +24,19 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const loadLocations = async () => {
-      try {
-        const uniqueLocations = await getUniqueLocations();
-        setLocations(uniqueLocations);
-      } catch (error) {
-        console.error('Failed to load locations:', error);
-      }
-    };
-
-    loadLocations();
-  }, []);
+    // Завантажуємо локації тільки коли користувач клікає на поле
+    if (isOpen && locations.length === 0) {
+      const loadLocations = async () => {
+        try {
+          const uniqueLocations = await getUniqueLocations();
+          setLocations(uniqueLocations);
+        } catch (error) {
+          console.error('Failed to load locations:', error);
+        }
+      };
+      loadLocations();
+    }
+  }, [isOpen, locations.length]);
 
   useEffect(() => {
     if (!value.trim()) {
@@ -103,7 +106,7 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
     <div className="location-autocomplete" onBlur={handleBlur}>
       <div className="location-autocomplete__input-wrapper">
         <span className="location-autocomplete__icon">
-          <img src="/src/assets/icons/map.svg" alt="" width="20" height="20" />
+          <img src="/icons/map.svg" alt="" width="20" height="20" />
         </span>
         <input
           ref={inputRef}
@@ -129,13 +132,7 @@ const LocationAutocomplete: React.FC<LocationAutocompleteProps> = ({
               onMouseDown={() => handleSelectLocation(location)}
               onMouseEnter={() => setHighlightedIndex(index)}
             >
-              <img
-                src="/src/assets/icons/map.svg"
-                alt=""
-                width="16"
-                height="16"
-                className="location-autocomplete__item-icon"
-              />
+              <img src="/icons/map.svg" alt="" width="20" height="20" />
               <span className="location-autocomplete__item-text">{location}</span>
             </li>
           ))}
