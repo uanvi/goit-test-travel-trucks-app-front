@@ -22,7 +22,7 @@ const CamperMeta: React.FC<CamperMetaProps> = memo(
         </div>
         <div className="camper-meta__location">
           <img
-            src="/src/assets/icons/map.svg"
+            src="/icons/map.svg"
             alt=""
             width="20"
             height="20"
