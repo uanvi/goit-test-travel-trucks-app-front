@@ -4,6 +4,7 @@ import MainButton from '../../common/MainButton/MainButton';
 import CamperMeta from '../CamperMeta/CamperMeta';
 import PriceDisplay from '../../common/PriceDisplay/PriceDisplay';
 import FeaturesList from '../FeaturesList/FeaturesList';
+import Icon from '../../common/Icon/Icon';
 import { getAvailableFeatures } from '../../../utils/featuresUtils';
 import { TEXTS } from '../../../config/textsConfig';
 import './CamperCard.css';
@@ -36,7 +37,7 @@ const CamperCard: React.FC<CamperCardProps> = memo(
       <div className="camper-card">
         <div className="camper-card__image">
           <img
-            src={camper.gallery[0]?.thumb || '/placeholder-camper.jpg'}
+            src={camper.gallery?.[0]?.thumb || '/placeholder-camper.jpg'}
             alt={camper.name}
             loading="lazy"
             fetchPriority="low"

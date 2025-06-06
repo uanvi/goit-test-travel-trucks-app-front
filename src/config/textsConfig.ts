@@ -92,5 +92,5 @@ export const TEXTS = {
     heartFilled: '❤️',
     heartEmpty: '🤍',
     star: '⭐',
-  },
+  } as const,
 };

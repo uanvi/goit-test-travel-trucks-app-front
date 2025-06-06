@@ -10,7 +10,7 @@ export interface FilterParams {
   location: string;
   form: string;
   equipment: {
-    [key: string]: boolean;
+    [key: string]: boolean | string;
     AC: boolean;
     kitchen: boolean;
     TV: boolean;
@@ -67,7 +67,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
   );
 
   const handleEquipmentChange = useCallback(
-    (key: string, value: boolean) => {
+    (key: keyof typeof filters.equipment, value: boolean) => {
       const newFilters = {
         ...filters,
         equipment: { ...filters.equipment, [key]: value },
@@ -116,7 +116,12 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
                   <input
                     type="checkbox"
                     checked={filters.equipment[filterKey]}
-                    onChange={e => handleEquipmentChange(filterKey, e.target.checked)}
+                    onChange={e =>
+                      handleEquipmentChange(
+                        filterKey as keyof typeof filters.equipment,
+                        e.target.checked,
+                      )
+                    }
                     className="filter-sidebar__checkbox"
                     disabled={isLoading}
                   />
