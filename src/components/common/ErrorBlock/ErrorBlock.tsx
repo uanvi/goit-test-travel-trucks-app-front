@@ -1,5 +1,5 @@
 import React from 'react';
-import { TEXTS } from '../config/textsConfig';
+import { TEXTS } from '../../../config/textsConfig';
 import './ErrorBlock.css';
 
 interface ErrorBlockProps {

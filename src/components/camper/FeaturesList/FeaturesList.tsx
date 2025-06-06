@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from '../Icon/Icon';
-import { Feature } from '../../utils/featuresUtils';
+import Icon from '../../common/Icon/Icon';
+import { Feature } from '../../../utils/featuresUtils';
 import './FeaturesList.css';
 
 interface FeaturesListProps {

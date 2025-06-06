@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getCampersByPage } from '../../api/campersApi';
 import { CAMPERS_PER_PAGE } from '../../config/apiConfig';
-import { FilterParams } from '../../components/FilterSidebar/FilterSidebar';
+import { FilterParams } from '../../components/layout/FilterSidebar/FilterSidebar';
 
 export interface Camper {
   id: string;

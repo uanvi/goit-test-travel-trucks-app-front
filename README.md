@@ -1,54 +1,138 @@
-# React + TypeScript + Vite
+# 🚐 TravelTrucks App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive frontend application for browsing and booking campers, built with **React**, **TypeScript**, and **Redux Toolkit**. Features advanced filtering, favorites management, and a comprehensive booking system.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[View Live Demo](https://vercel.com)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Core Technologies
+
+- **React 18** with **TypeScript** - Modern React with strict typing
+- **Redux Toolkit** - Predictable state management
+- **React Router v6** - Client-side routing
+- **Axios** - HTTP client with interceptors
+
+### Styling & UI
+
+- **CSS Custom Properties** - Design system with CSS variables
+- **BEM Methodology** - Scalable CSS architecture
+- **Responsive Design** - Mobile-first approach
+- **CSS Grid & Flexbox** - Modern layout techniques
+
+### Development & Build
+
+- **Vite** - Fast build tool and dev server
+- **ESLint + Prettier** - Code quality and formatting
+- **TypeScript** - Static type checking
+
+---
+
+## ✨ Features
+
+- **Homepage** with hero banner and call-to-action button leading to catalog
+- **Camper catalog page** with:
+- Filtering by location, vehicle type, and equipment
+- Add/remove favorites (saved in `localStorage`)
+- "Load More" button for incremental loading
+- **Camper details page** with:
+- Image gallery
+- Detailed specs and description
+- User reviews with 5-star rating system
+- Booking form with validation
+- **Responsive design** for mobile, tablet, and desktop
+- **Error handling** with user-friendly messages
+- **Loading states** and smooth animations
+
+---
+
+### Component Structure
+
+```
+src/
+├── 📁 api/                    # API layer
+│   └── campersApi.ts          # Axios services
+├── 📁 components/             # Reusable UI components
+│   ├── BookingForm/           # Booking form with validation
+│   ├── CamperCard/            # Catalog item component
+│   ├── FilterSidebar/         # Advanced filtering
+│   ├── Header/                # Navigation header
+│   ├── Icon/                  # SVG icon system
+│   └── MainButton/            # Primary CTA button
+├── 📁 config/                 # Configuration files
+│   ├── apiConfig.ts           # API endpoints & settings
+│   ├── featuresConfig.ts      # Feature definitions
+│   └── textsConfig.ts         # Centralized text content
+├── 📁 pages/                  # Route components
+│   ├── HomePage/              # Landing page
+│   ├── CatalogPage/           # Camper listing
+│   └── CamperDetailsPage/     # Individual camper
+├── 📁 redux/                  # State management
+│   ├── campers/               # Catalog state & actions
+│   ├── camperDetails/         # Detail page state
+│   └── store.ts               # Redux store configuration
+├── 📁 styles/                 # Global styles
+│   └── design-system.css      # CSS custom properties
+└── 📁 utils/                  # Helper functions
+    └── featuresUtils.ts       # Feature mapping logic
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### State Management
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Redux Toolkit** for global state
+- **RTK Query** patterns for async data fetching
+- **Optimistic Updates** for favorites
+- **Error Boundary** integration
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+
+## 📱 Responsive Design (Draft)
+
+### Breakpoints
+
+- **Mobile**: 320px - 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: 1024px+
+- **Large Desktop**: 1440px+
+
+## 🔄 API Integration
+
+### Endpoints Used
+
+```typescript
+GET /campers              # Paginated camper list
+GET /campers/:id          # Individual camper details
 ```
+
+---
+
+## 📌 TODO
+
+- Add unit tests (Jest + React Testing Library)
+- Split FilterSidebar into smaller components
+- Improve error handling with global error boundary
+- Add skeleton loading states
+- Enhance image gallery with lightbox functionality
+- Improve reviews component for better UX
+- Finalize Icons module implementation
+- Improve form validation and UX
+
+## 📈 Future Enhancements
+
+### High Priority
+
+- [ ] **Unit & Integration Tests** - Jest + React Testing Library
+- [ ] **Advanced Image Gallery** - Lightbox with zoom
+
+### Medium Priority
+
+- [ ] **Reviews System** - User-generated reviews
+- [ ] **Map Integration** - Camper locations on map
+
+### Low Priority
+
+- [ ] **Internationalization** - Multi-language support

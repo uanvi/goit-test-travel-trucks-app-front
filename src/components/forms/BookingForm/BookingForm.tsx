@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainButton from '../MainButton/MainButton';
+import MainButton from '../../common/MainButton/MainButton';
 import './BookingForm.css';
 
 interface BookingFormProps {

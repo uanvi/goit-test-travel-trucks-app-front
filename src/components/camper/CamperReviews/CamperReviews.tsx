@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
+import { Camper } from '../../../redux/campers/campersSlice';
 import './CamperReviews.css';
 
 interface CamperReviewsProps {

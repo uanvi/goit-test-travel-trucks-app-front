@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feature } from '../../utils/featuresUtils';
+import { Feature } from '../../../utils/featuresUtils';
 import './FeatureBadge.css';
 
 interface FeatureBadgeProps {

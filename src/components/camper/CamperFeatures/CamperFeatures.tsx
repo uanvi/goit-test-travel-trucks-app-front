@@ -1,8 +1,8 @@
 import React from 'react';
-import { Camper } from '../../redux/campers/campersSlice';
+import { Camper } from '../../../redux/campers/campersSlice';
 import VehicleDetails from '../VehicleDetails/VehicleDetails';
 import FeaturesList from '../FeaturesList/FeaturesList';
-import { getAvailableFeatures } from '../../utils/featuresUtils';
+import { getAvailableFeatures } from '../../../utils/featuresUtils';
 import './CamperFeatures.css';
 
 interface CamperFeaturesProps {

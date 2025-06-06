@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getUniqueLocations } from '../../api/campersApi';
+import { getUniqueLocations } from '../../../api/campersApi';
 import './LocationAutocomplete.css';
 
 interface LocationAutocompleteProps {

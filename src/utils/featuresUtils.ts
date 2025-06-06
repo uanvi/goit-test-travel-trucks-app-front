@@ -30,16 +30,12 @@ export const getFeatureConfig = (camper: Camper): Feature[] => {
     icon: feature.icon,
     label:
       typeof camper[feature.key] === 'string' ? (camper[feature.key] as string) : feature.label,
-    condition: camper[feature.key] as boolean,
+    condition: Boolean(camper[feature.key]),
   }));
 };
 
 export const getAvailableFeatures = (camper: Camper): Feature[] => {
-  return getFeatureConfig(camper).filter(
-    feature =>
-      feature.condition === true ||
-      (typeof feature.condition === 'string' && feature.condition.trim()),
-  );
+  return getFeatureConfig(camper).filter(feature => feature.condition);
 };
 
 export const getDisplayFeatures = (camper: Camper, maxCount?: number): Feature[] => {
