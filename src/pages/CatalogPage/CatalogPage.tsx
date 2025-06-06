@@ -96,23 +96,6 @@ const CatalogPage: React.FC = () => {
                       {TEXTS.filter.form.replace('{form}', activeFilters.form)}
                     </span>
                   )}
-                  {Object.entries(activeFilters.equipment).map(([key, value]) => {
-                    if (value === true) {
-                      return (
-                        <span key={key} className="catalog-page__filter-tag">
-                          {TEXTS.filter.equipment.replace('{equipment}', key)}
-                        </span>
-                      );
-                    }
-                    if (typeof value === 'string' && value.trim()) {
-                      return (
-                        <span key={key} className="catalog-page__filter-tag">
-                          {TEXTS.filter.transmission.replace('{transmission}', value)}
-                        </span>
-                      );
-                    }
-                    return null;
-                  })}
                 </div>
               )}
             </div>

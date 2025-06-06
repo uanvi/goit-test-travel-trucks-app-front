@@ -10,7 +10,6 @@ export interface FilterParams {
   location: string;
   form: string;
   equipment: {
-    [key: string]: boolean | string;
     AC: boolean;
     kitchen: boolean;
     TV: boolean;
@@ -20,6 +19,7 @@ export interface FilterParams {
     gas: boolean;
     water: boolean;
     radio: boolean;
+    [key: string]: boolean; // Індексна сигнатура тільки для boolean
   };
 }
 
@@ -115,7 +115,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange, isLoading
                 <label key={filterKey} className="filter-sidebar__equipment-item">
                   <input
                     type="checkbox"
-                    checked={filters.equipment[filterKey]}
+                    checked={Boolean(filters.equipment[filterKey])}
                     onChange={e =>
                       handleEquipmentChange(
                         filterKey as keyof typeof filters.equipment,
